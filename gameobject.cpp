@@ -17,15 +17,18 @@ GameObject::GameObject(){}
 GameObject::~GameObject(){}
 
 void GameObject::transformObj(QMatrix4x4 *mat, int type, int indice){
-    if(type == 0){
-        mat->rotate(QQuaternion::fromAxisAndAngle(QVector3D(0.0, 1.0, 0.0), this->angle));
-        this->angle += this->vit;
-        printf("%d : %f \n",indice,angle);
+
+
+    if(parent != NULL){
+        this->parent->transformObj(mat, 1, indice-1);
     }
+    mat->rotate(QQuaternion::fromAxisAndAngle(QVector3D(0.0, 1.0, 0.0), this->angle));
+    this->angle += this->vit;
+    printf("%d : %f \n",indice,angle);
 
     this->transform.transform(mat);
 
-    if(parent != NULL){
-        parent->transformObj(mat, 1, indice - 1);
-    }
+    mat->rotate(QQuaternion::fromAxisAndAngle(QVector3D(0.0, 1.0, 0.0), this->angle));
+    this->angle += this->vit;
+    printf("%d : %f \n",indice,angle);
 }

@@ -12,6 +12,7 @@ public:
     Transform();
     Transform(QQuaternion rotation, QVector3D translation, float scale);
     ~Transform();
+    void addTranslation(QVector3D translation);
 
     QQuaternion rotation;
     QVector3D translation;

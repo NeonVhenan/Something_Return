@@ -65,23 +65,23 @@ GeometryEngine::GeometryEngine()
     arrayBuf.create();
     indexBuf.create();
 
-    objet = new GameObject(NULL, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0, 0.0, 0.0), 0), QVector3D(0.0f,-1.0f,0.0f), 1.0f), 0.0);
+    objet = new GameObject(NULL, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), 0.0);
     objet->arrayBuf.create();
     objet->indexBuf.create();
 
-    soleil = new GameObject(objet, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0, 0.0, 0.0), 0), QVector3D(0.0,0.0,0.0), 5.0f), 0.000000347 * M_PI / 180 * 10);
+    soleil = new GameObject(objet, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 5.0f), 0.000000347 * M_PI / 180 * 10);
     soleil->arrayBuf.create();
     soleil->indexBuf.create();
 
-    objet1 = new GameObject(objet, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0, 0.0, 0.0), 0), QVector3D(1.0f,0.0,0.0f), 1.0f), 0.0);
+    objet1 = new GameObject(objet, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(1.0f,0.0f,0.0f), 1.0f), 1.0 * M_PI / 180 * 10);
     objet1->arrayBuf.create();
     objet1->indexBuf.create();
 
-    terre = new GameObject(objet1, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0, 0.0, 1.0), 23.44 * M_PI / 180), QVector3D(0.0,0.0,0.0), 3.0f/*0.009142857f*/), 0.1 * M_PI / 180 * 10);
+    terre = new GameObject(objet, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 1.0f), 23.44 * M_PI / 180), QVector3D(1.0f,0.0f,0.0f), 3.0f/*0.009142857f*/), 1.0 * M_PI / 180 * 10);
     terre->arrayBuf.create();
     terre->indexBuf.create();
 
-    lune = new GameObject(objet1, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0, 0.0, 1.0), 6.68 * M_PI / 180), QVector3D(0.109f,0.0,0.0f), 1.0f/*0.002485714f*/), 13.2 * M_PI / 180 * 10);
+    lune = new GameObject(objet1, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 1.0f), 6.68 * M_PI / 180), QVector3D(0.5f,0.0,0.0f), 1.0f/*0.002485714f*/), 13.2 * M_PI / 180 * 10);
     lune->arrayBuf.create();
     lune->indexBuf.create();
 
@@ -193,6 +193,11 @@ void GeometryEngine::drawCubeGeometry(QOpenGLShaderProgram *program)
 
     // Offset for position
     offset = 0;
+
+    mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
+
+    //objet1->transformObj(&mat, 0, 1);
+
 
     mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
 
