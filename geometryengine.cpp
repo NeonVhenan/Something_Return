@@ -65,19 +65,19 @@ GeometryEngine::GeometryEngine()
     arrayBuf.create();
     indexBuf.create();
 
-    objet = new GameObject(NULL, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), 0.0);
-    objet->arrayBuf.create();
-    objet->indexBuf.create();
+    monde = new GameObject(NULL, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), 0.0);
+    monde->arrayBuf.create();
+    monde->indexBuf.create();
 
-    soleil = new GameObject(objet, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 5.0f), 0.000000347 * M_PI / 180 * 10);
+    soleil = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 5.0f), 0.000000347 * M_PI / 180 * 10);
     soleil->arrayBuf.create();
     soleil->indexBuf.create();
 
-    objet1 = new GameObject(objet, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(1.0f,0.0f,0.0f), 1.0f), 1.0 * M_PI / 180 * 10);
+    objet1 = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(1.0f,0.0f,0.0f), 1.0f), 1.0 * M_PI / 180 * 10);
     objet1->arrayBuf.create();
     objet1->indexBuf.create();
 
-    terre = new GameObject(objet, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 1.0f), 23.44 * M_PI / 180), QVector3D(1.0f,0.0f,0.0f), 3.0f/*0.009142857f*/), 1.0 * M_PI / 180 * 10);
+    terre = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 1.0f), 23.44 * M_PI / 180), QVector3D(1.0f,0.0f,0.0f), 3.0f/*0.009142857f*/), 1.0 * M_PI / 180 * 10);
     terre->arrayBuf.create();
     terre->indexBuf.create();
 

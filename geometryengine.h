@@ -67,7 +67,7 @@ public:
 private:
     void initCubeGeometry();
 
-    GameObject* objet;
+    GameObject* monde;
     GameObject* objet1;
     GameObject* soleil;
     GameObject* terre;

@@ -2,6 +2,7 @@
 #define COLLIDERCAPSULE_H
 
 #include "collider.h"
+#include "colliderbox.h"
 
 class ColliderCapsule : public Collider
 {

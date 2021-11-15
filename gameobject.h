@@ -3,6 +3,7 @@
 
 #include "mesh.h"
 #include "transform.h"
+#include "collider.h"
 
 class GameObject
 {
@@ -18,6 +19,8 @@ public:
     Transform transform;
     float angle;
     float vit;
+
+    Collider collide;
 
 
     QOpenGLBuffer arrayBuf;
