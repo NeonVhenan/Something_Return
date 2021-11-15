@@ -106,6 +106,8 @@ private:
     float translationZ = 0;
     float translationX = 0;
 
+    int rotateY = 0;
+
     int type = 0;
     float angle = 0.0;
 };

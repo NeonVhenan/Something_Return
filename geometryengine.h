@@ -61,17 +61,28 @@ class GeometryEngine : protected QOpenGLFunctions_3_1
 public:
     GeometryEngine();
     virtual ~GeometryEngine();
+    static GameObject* monde;
 
     void drawCubeGeometry(QOpenGLShaderProgram *program);
+
+
 
 private:
     void initCubeGeometry();
 
-    GameObject* monde;
+
     GameObject* mur1;
     GameObject* mur2;
     GameObject* mur3;
     GameObject* mur4;
+
+    GameObject* mur5;
+    GameObject* mur6;
+    GameObject* mur7;
+    GameObject* mur8;
+
+
+
 
     QOpenGLBuffer arrayBuf;
     QOpenGLBuffer indexBuf;

@@ -57,6 +57,8 @@
 
 #define M_PI 3.1415926535897932384626433832795
 
+GameObject * GeometryEngine::monde = new GameObject(NULL, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), Collider());
+
 //! [0]
 GeometryEngine::GeometryEngine()
     : indexBuf(QOpenGLBuffer::IndexBuffer)
@@ -65,25 +67,42 @@ GeometryEngine::GeometryEngine()
     arrayBuf.create();
     indexBuf.create();
 
-    monde = new GameObject(NULL, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f);
+
     monde->arrayBuf.create();
     monde->indexBuf.create();
 
-    mur1 = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 5.0f)));
+    mur1 = new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), Collider());
     mur1->arrayBuf.create();
     mur1->indexBuf.create();
 
-    objet1 = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(1.0f,0.0f,0.0f), 1.0f));
-    objet1->arrayBuf.create();
-    objet1->indexBuf.create();
+    mur2 = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), Collider());
+    mur2->arrayBuf.create();
+    mur2->indexBuf.create();
 
-    terre = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 1.0f), 23.44 * M_PI / 180), QVector3D(1.0f,0.0f,0.0f), 3.0f/*0.009142857f*/));
-    terre->arrayBuf.create();
-    terre->indexBuf.create();
+    mur3 = new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), Collider());
+    mur3->arrayBuf.create();
+    mur3->indexBuf.create();
 
-    lune = new GameObject(objet1, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 1.0f), 6.68 * M_PI / 180), QVector3D(0.5f,0.0,0.0f), 1.0f/*0.002485714f*/));
-    lune->arrayBuf.create();
-    lune->indexBuf.create();
+    mur4 = new GameObject(monde, Mesh(4), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), Collider());
+    mur4->arrayBuf.create();
+    mur4->indexBuf.create();
+
+    mur5 = new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(0.0f,0.0f,-20.0f), 1.0f), Collider());
+    mur5->arrayBuf.create();
+    mur5->indexBuf.create();
+
+    mur6 = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(0.0f,0.0f,-20.0f), 1.0f), Collider());
+    mur6->arrayBuf.create();
+    mur6->indexBuf.create();
+
+    mur7 = new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(0.0f,0.0f,-20.0f), 1.0f), Collider());
+    mur7->arrayBuf.create();
+    mur7->indexBuf.create();
+
+    mur8 = new GameObject(monde, Mesh(4), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(0.0f,0.0f,-20.0f), 1.0f), Collider());
+    mur8->arrayBuf.create();
+    mur8->indexBuf.create();
+
 
     // Initializes cube geometry and transfers it to VBOs
     initCubeGeometry();
@@ -99,14 +118,6 @@ GeometryEngine::~GeometryEngine()
 
 void GeometryEngine::initCubeGeometry()
 {
-
-    terre->arrayBuf.bind();
-    terre->arrayBuf.allocate(terre->mesh.vertices, terre->mesh.vertexNumber * sizeof(VertexData));
-
-    // Transfer index data to VBO 1
-    terre->indexBuf.bind();
-    terre->indexBuf.allocate(terre->mesh.indices,  terre->mesh.indexCount* sizeof(GLushort));
-
     mur1->arrayBuf.bind();
     mur1->arrayBuf.allocate(mur1->mesh.vertices, mur1->mesh.vertexNumber * sizeof(VertexData));
 
@@ -114,12 +125,56 @@ void GeometryEngine::initCubeGeometry()
     mur1->indexBuf.bind();
     mur1->indexBuf.allocate(mur1->mesh.indices,  mur1->mesh.indexCount* sizeof(GLushort));
 
-    lune->arrayBuf.bind();
-    lune->arrayBuf.allocate(lune->mesh.vertices, lune->mesh.vertexNumber * sizeof(VertexData));
+    mur2->arrayBuf.bind();
+    mur2->arrayBuf.allocate(mur2->mesh.vertices, mur2->mesh.vertexNumber * sizeof(VertexData));
 
     // Transfer index data to VBO 1
-    lune->indexBuf.bind();
-    lune->indexBuf.allocate(lune->mesh.indices,  lune->mesh.indexCount* sizeof(GLushort));
+    mur2->indexBuf.bind();
+    mur2->indexBuf.allocate(mur2->mesh.indices,  mur2->mesh.indexCount* sizeof(GLushort));
+
+    mur3->arrayBuf.bind();
+    mur3->arrayBuf.allocate(mur3->mesh.vertices, mur3->mesh.vertexNumber * sizeof(VertexData));
+
+    // Transfer index data to VBO 1
+    mur3->indexBuf.bind();
+    mur3->indexBuf.allocate(mur3->mesh.indices,  mur3->mesh.indexCount* sizeof(GLushort));
+
+    mur4->arrayBuf.bind();
+    mur4->arrayBuf.allocate(mur4->mesh.vertices, mur4->mesh.vertexNumber * sizeof(VertexData));
+
+    // Transfer index data to VBO 1
+    mur4->indexBuf.bind();
+    mur4->indexBuf.allocate(mur4->mesh.indices,  mur4->mesh.indexCount* sizeof(GLushort));
+
+
+
+    mur5->arrayBuf.bind();
+    mur5->arrayBuf.allocate(mur5->mesh.vertices, mur5->mesh.vertexNumber * sizeof(VertexData));
+
+    // Transfer index data to VBO 1
+    mur5->indexBuf.bind();
+    mur5->indexBuf.allocate(mur5->mesh.indices,  mur5->mesh.indexCount* sizeof(GLushort));
+
+    mur6->arrayBuf.bind();
+    mur6->arrayBuf.allocate(mur6->mesh.vertices, mur6->mesh.vertexNumber * sizeof(VertexData));
+
+    // Transfer index data to VBO 1
+    mur6->indexBuf.bind();
+    mur6->indexBuf.allocate(mur6->mesh.indices,  mur6->mesh.indexCount* sizeof(GLushort));
+
+    mur7->arrayBuf.bind();
+    mur7->arrayBuf.allocate(mur7->mesh.vertices, mur7->mesh.vertexNumber * sizeof(VertexData));
+
+    // Transfer index data to VBO 1
+    mur7->indexBuf.bind();
+    mur7->indexBuf.allocate(mur7->mesh.indices,  mur7->mesh.indexCount* sizeof(GLushort));
+
+    mur8->arrayBuf.bind();
+    mur8->arrayBuf.allocate(mur8->mesh.vertices, mur8->mesh.vertexNumber * sizeof(VertexData));
+
+    // Transfer index data to VBO 1
+    mur8->indexBuf.bind();
+    mur8->indexBuf.allocate(mur8->mesh.indices,  mur8->mesh.indexCount* sizeof(GLushort));
 //! [1]
 }
 
@@ -157,67 +212,178 @@ void GeometryEngine::drawCubeGeometry(QOpenGLShaderProgram *program)
     // Draw cube geometry using indices from VBO 1
     glDrawElements(GL_TRIANGLES, mur1->indexBuf.size(), GL_UNSIGNED_SHORT, 0); //Careful update indicesNumber when creating new geometry
 
-    terre->arrayBuf.bind();
-   // indexBuf = objet.indexBuf;
-    terre->indexBuf.bind();
+    mur2->arrayBuf.bind();
+    mur2->indexBuf.bind();
 
-    // Offset for position
     offset = 0;
 
     mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
 
-    terre->transformObj(&mat, 0, 1);
+    mur2->transformObj(&mat, 0, 1);
 
     program->setUniformValue("transformation", mat);
 
-    // Tell OpenGL programmable pipeline how to locate vertex position data
     vertexLocation = program->attributeLocation("a_position");
     program->enableAttributeArray(vertexLocation);
     program->setAttributeBuffer(vertexLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
 
-    // Offset for texture coordinate
     offset += sizeof(QVector3D);
 
-    // Tell OpenGL programmable pipeline how to locate vertex texture coordinate data
     texcoordLocation = program->attributeLocation("a_texcoord");
     program->enableAttributeArray(texcoordLocation);
     program->setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
 
-    // Draw cube geometry using indices from VBO 1
-    glDrawElements(GL_TRIANGLES, terre->indexBuf.size(), GL_UNSIGNED_SHORT, 0);
+    glDrawElements(GL_TRIANGLES, mur2->indexBuf.size(), GL_UNSIGNED_SHORT, 0);
 
 
-    lune->arrayBuf.bind();
-   // indexBuf = objet.indexBuf;
-    lune->indexBuf.bind();
+    mur3->arrayBuf.bind();
+    mur3->indexBuf.bind();
 
-    // Offset for position
     offset = 0;
 
     mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
 
-    //objet1->transformObj(&mat, 0, 1);
-
-
-    mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
-
-    lune->transformObj(&mat, 0, 2);
+    mur3->transformObj(&mat, 0, 1);
 
     program->setUniformValue("transformation", mat);
 
-    // Tell OpenGL programmable pipeline how to locate vertex position data
     vertexLocation = program->attributeLocation("a_position");
     program->enableAttributeArray(vertexLocation);
     program->setAttributeBuffer(vertexLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
 
-    // Offset for texture coordinate
     offset += sizeof(QVector3D);
 
-    // Tell OpenGL programmable pipeline how to locate vertex texture coordinate data
     texcoordLocation = program->attributeLocation("a_texcoord");
     program->enableAttributeArray(texcoordLocation);
     program->setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
 
-    // Draw cube geometry using indices from VBO 1
-    glDrawElements(GL_TRIANGLES, lune->indexBuf.size(), GL_UNSIGNED_SHORT, 0);
+    glDrawElements(GL_TRIANGLES, mur3->indexBuf.size(), GL_UNSIGNED_SHORT, 0);
+
+
+    mur4->arrayBuf.bind();
+    mur4->indexBuf.bind();
+
+    offset = 0;
+
+    mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
+
+
+    mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
+
+    mur4->transformObj(&mat, 0, 2);
+
+    program->setUniformValue("transformation", mat);
+
+    vertexLocation = program->attributeLocation("a_position");
+    program->enableAttributeArray(vertexLocation);
+    program->setAttributeBuffer(vertexLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
+
+    offset += sizeof(QVector3D);
+
+    texcoordLocation = program->attributeLocation("a_texcoord");
+    program->enableAttributeArray(texcoordLocation);
+    program->setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
+
+    glDrawElements(GL_TRIANGLES, mur4->indexBuf.size(), GL_UNSIGNED_SHORT, 0);
+
+
+
+
+     mur5->arrayBuf.bind();
+     mur5->indexBuf.bind();
+
+     offset = 0;
+
+     mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
+
+     mur5->transformObj(&mat, 0, 0);
+
+     program->setUniformValue("transformation", mat);
+
+     vertexLocation = program->attributeLocation("a_position");
+     program->enableAttributeArray(vertexLocation);
+     program->setAttributeBuffer(vertexLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
+
+     offset += sizeof(QVector3D);
+
+     texcoordLocation = program->attributeLocation("a_texcoord");
+     program->enableAttributeArray(texcoordLocation);
+     program->setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
+
+     glDrawElements(GL_TRIANGLES, mur5->indexBuf.size(), GL_UNSIGNED_SHORT, 0); //Careful update indicesNumber when creating new geometry
+
+     mur6->arrayBuf.bind();
+     mur6->indexBuf.bind();
+
+     offset = 0;
+
+     mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
+
+     mur6->transformObj(&mat, 0, 1);
+
+     program->setUniformValue("transformation", mat);
+
+     vertexLocation = program->attributeLocation("a_position");
+     program->enableAttributeArray(vertexLocation);
+     program->setAttributeBuffer(vertexLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
+
+     offset += sizeof(QVector3D);
+
+     texcoordLocation = program->attributeLocation("a_texcoord");
+     program->enableAttributeArray(texcoordLocation);
+     program->setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
+
+     glDrawElements(GL_TRIANGLES, mur6->indexBuf.size(), GL_UNSIGNED_SHORT, 0);
+
+
+     mur7->arrayBuf.bind();
+     mur7->indexBuf.bind();
+
+     offset = 0;
+
+     mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
+
+     mur7->transformObj(&mat, 0, 1);
+
+     program->setUniformValue("transformation", mat);
+
+     vertexLocation = program->attributeLocation("a_position");
+     program->enableAttributeArray(vertexLocation);
+     program->setAttributeBuffer(vertexLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
+
+     offset += sizeof(QVector3D);
+
+     texcoordLocation = program->attributeLocation("a_texcoord");
+     program->enableAttributeArray(texcoordLocation);
+     program->setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
+
+     glDrawElements(GL_TRIANGLES, mur7->indexBuf.size(), GL_UNSIGNED_SHORT, 0);
+
+
+     mur8->arrayBuf.bind();
+     mur8->indexBuf.bind();
+
+     offset = 0;
+
+     mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
+
+
+     mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
+
+     mur8->transformObj(&mat, 0, 2);
+
+     program->setUniformValue("transformation", mat);
+
+     vertexLocation = program->attributeLocation("a_position");
+     program->enableAttributeArray(vertexLocation);
+     program->setAttributeBuffer(vertexLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
+
+     offset += sizeof(QVector3D);
+
+     texcoordLocation = program->attributeLocation("a_texcoord");
+     program->enableAttributeArray(texcoordLocation);
+     program->setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
+
+     glDrawElements(GL_TRIANGLES, mur8->indexBuf.size(), GL_UNSIGNED_SHORT, 0);
+
 }

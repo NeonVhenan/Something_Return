@@ -131,27 +131,49 @@ void MainWidget::timerEvent(QTimerEvent *)
 //! [1]
 
 void MainWidget::keyPressEvent(QKeyEvent *e){
-    if(type == 0){
-        if(e->key() == Qt::Key_Up){
-            translationZ +=0.1;
-        }
-        if(e->key() == Qt::Key_Left){
-            translationX -=0.1;
-        }
-        if(e->key() == Qt::Key_Right){
-            translationX +=0.1;
-        }
-        if(e->key() == Qt::Key_Down){
-            translationZ -= 0.1;
+    if(e->key() == Qt::Key_Up){
+        //translationZ +=0.1;
+        int val = rotateY % 360;
+        switch(val){
+        case 90 :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(-0.1f, 0.0f, 0.0f));
+            break;
+        case 180 :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -0.1f));
+            break;
+        case 270 :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.1f, 0.0f, 0.0f));
+            break;
+        default :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, 0.1f));
+            break;
         }
     }
-    if(e->key() == Qt::Key_C){
-        if(type == 0){
-            type = 1;
-            angle = 0.0;
+    if(e->key() == Qt::Key_Left){
+        rotateY +=270;
+        GeometryEngine::monde->transform.addRotation(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f),-90));
+    }
+    if(e->key() == Qt::Key_Right){
+        rotateY +=90;
+        GeometryEngine::monde->transform.addRotation(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f),-90));
+    }
+    if(e->key() == Qt::Key_Down){
+        //translationZ -= 0.1;
+        int val = rotateY % 360;
+        switch(val){
+        case 90 :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.1f, 0.0f, 0.0f));
+            break;
+        case 180 :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, 0.1f));
+            break;
+        case 270 :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(-0.1f, 0.0f, 0.0f));
+            break;
+        default :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -0.1f));
+            break;
         }
-        else
-            type = 0;
     }
 
     update();
@@ -172,10 +194,11 @@ void MainWidget::initializeGL()
 
     // Enable back face culling
     //glEnable(GL_CULL_FACE);
+    glDisable(GL_CULL_FACE);
 
 //! [2]
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 
     geometries = new GeometryEngine;
@@ -267,7 +290,7 @@ void MainWidget::resizeGL(int w, int h)
     qreal aspect = qreal(w) / qreal(h ? h : 1);
 
     // Set near plane to 3.0, far plane to 7.0, field of view 45 degrees
-    const qreal zNear = 3.0, zFar = 7.0, fov = 60.0;
+    const qreal zNear = -3.0, zFar = 3.0, fov = 45.0;
 
     // Reset projectionif(e->key() == Qt::Key_Up){
     projection.setToIdentity();
@@ -290,18 +313,33 @@ void MainWidget::paintGL()
 //! [6]
     QMatrix4x4 matrix;
 
-    matrix.translate(0.0, -1.0, -5.0);
-    QVector3D t = QVector3D(translationX, 0.0, translationZ);
-    matrix.translate(t);
-    matrix.rotate(QQuaternion::fromAxisAndAngle(QVector3D(0.0, 1.0, 0.0), 200));
-    if(type == 0)
-        matrix.rotate(rotation);
+    matrix.translate(0.0, -2.0, 0.0);
 
-    if(type == 1){
+    //matrix.rotate(QQuaternion::fromAxisAndAngle(QVector3D(0.0, 1.0, 0.0), rotateY));
+    /*int tmp;
+    int val = rotateY % 360;
+    switch(val){
+    case 90 :
+        tmp = translationX;
+        translationX = -translationZ;
+        translationZ = tmp;
+        break;
+    case 180 :
+        translationX = -translationX;
+        translationZ = -translationZ;
+        break;
+    case 270 :
+        tmp = -translationX;
+        translationX = translationZ;
+        translationZ = tmp;
+        break;
+    default :
+        break;
+    }*/
+    //QVector3D t = QQuaternion::fromAxisAndAngle(QVector3D(0.0, 1.0, 0.0), rotateY) * QVector3D(translationX, 0.0, translationZ);
+    //matrix.translate(t);
+    matrix.rotate(rotation);
 
-        matrix.rotate(QQuaternion::fromAxisAndAngle(QVector3D(-1.0, -1.0, 0.0), 45));
-        matrix.rotate(QQuaternion::fromAxisAndAngle(QVector3D(0.0, 1.0, 0.0), angle));
-    }
 
 
     // Set modelview-projection matrix
@@ -313,10 +351,6 @@ void MainWidget::paintGL()
     program.setUniformValue("texture1", 1);
     program.setUniformValue("texture2", 2);
     program.setUniformValue("texture3", 3);
-
-
-
-
 
     // Draw cube geometry
     geometries->drawCubeGeometry(&program);

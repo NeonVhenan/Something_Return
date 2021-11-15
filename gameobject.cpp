@@ -21,7 +21,6 @@ void GameObject::transformObj(QMatrix4x4 *mat, int type, int indice){
     if(parent != NULL){
         this->parent->transformObj(mat, 1, indice-1);
     }
-    printf("%d : %f \n",indice,angle);
 
     this->transform.transform(mat);
 }

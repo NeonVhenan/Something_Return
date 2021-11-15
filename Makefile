@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = gameengine1.0.0
-DISTDIR = /home/e20200002979/Documents/S3/moteur/TP3/.tmp/gameengine1.0.0
+DISTDIR = /home/e20200002979/Documents/S3/moteur/projet/.tmp/gameengine1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
 LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so /usr/lib/x86_64-linux-gnu/libGL.so -lpthread   
@@ -53,6 +53,9 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = main.cpp \
+		collider.cpp \
+		colliderbox.cpp \
+		collidercapsule.cpp \
 		gameobject.cpp \
 		mesh.cpp \
 		transform.cpp \
@@ -61,6 +64,9 @@ SOURCES       = main.cpp \
 		qrc_textures.cpp \
 		moc_mainwidget.cpp
 OBJECTS       = main.o \
+		collider.o \
+		colliderbox.o \
+		collidercapsule.o \
 		gameobject.o \
 		mesh.o \
 		transform.o \
@@ -125,7 +131,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -144,11 +149,17 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		gameengine.pro gameobject.h \
+		gameengine.pro collider.h \
+		colliderbox.h \
+		collidercapsule.h \
+		gameobject.h \
 		mainwidget.h \
 		geometryengine.h \
 		mesh.h \
 		transform.h main.cpp \
+		collider.cpp \
+		colliderbox.cpp \
+		collidercapsule.cpp \
 		gameobject.cpp \
 		mesh.cpp \
 		transform.cpp \
@@ -221,7 +232,6 @@ Makefile: gameengine.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.c
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -300,7 +310,6 @@ Makefile: gameengine.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.c
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -338,8 +347,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents shaders.qrc textures.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents gameobject.h mainwidget.h geometryengine.h mesh.h transform.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp gameobject.cpp mesh.cpp transform.cpp mainwidget.cpp geometryengine.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents collider.h colliderbox.h collidercapsule.h gameobject.h mainwidget.h geometryengine.h mesh.h transform.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp collider.cpp colliderbox.cpp collidercapsule.cpp gameobject.cpp mesh.cpp transform.cpp mainwidget.cpp geometryengine.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -377,7 +386,6 @@ qrc_textures.cpp: textures.qrc \
 		snowrocks.png \
 		grass.png \
 		rock.png \
-		cube.png \
 		Heightmap_Mountain.png
 	/usr/lib/qt5/bin/rcc -name textures textures.qrc -o qrc_textures.cpp
 
@@ -395,9 +403,10 @@ moc_mainwidget.cpp: mainwidget.h \
 		gameobject.h \
 		mesh.h \
 		transform.h \
+		collider.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/e20200002979/Documents/S3/moteur/TP3/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/e20200002979/Documents/S3/moteur/TP3 -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwidget.h -o moc_mainwidget.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/e20200002979/Documents/S3/moteur/projet/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/e20200002979/Documents/S3/moteur/projet -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwidget.h -o moc_mainwidget.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -419,12 +428,26 @@ main.o: main.cpp mainwidget.h \
 		geometryengine.h \
 		gameobject.h \
 		mesh.h \
-		transform.h
+		transform.h \
+		collider.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+
+collider.o: collider.cpp collider.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o collider.o collider.cpp
+
+colliderbox.o: colliderbox.cpp colliderbox.h \
+		collider.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o colliderbox.o colliderbox.cpp
+
+collidercapsule.o: collidercapsule.cpp collidercapsule.h \
+		collider.h \
+		colliderbox.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o collidercapsule.o collidercapsule.cpp
 
 gameobject.o: gameobject.cpp gameobject.h \
 		mesh.h \
-		transform.h
+		transform.h \
+		collider.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gameobject.o gameobject.cpp
 
 mesh.o: mesh.cpp mesh.h
@@ -437,13 +460,15 @@ mainwidget.o: mainwidget.cpp mainwidget.h \
 		geometryengine.h \
 		gameobject.h \
 		mesh.h \
-		transform.h
+		transform.h \
+		collider.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwidget.o mainwidget.cpp
 
 geometryengine.o: geometryengine.cpp geometryengine.h \
 		gameobject.h \
 		mesh.h \
-		transform.h
+		transform.h \
+		collider.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o geometryengine.o geometryengine.cpp
 
 qrc_shaders.o: qrc_shaders.cpp 
