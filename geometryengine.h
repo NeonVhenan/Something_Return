@@ -68,10 +68,10 @@ private:
     void initCubeGeometry();
 
     GameObject* monde;
-    GameObject* objet1;
-    GameObject* soleil;
-    GameObject* terre;
-    GameObject* lune;
+    GameObject* mur1;
+    GameObject* mur2;
+    GameObject* mur3;
+    GameObject* mur4;
 
     QOpenGLBuffer arrayBuf;
     QOpenGLBuffer indexBuf;

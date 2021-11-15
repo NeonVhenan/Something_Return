@@ -8,7 +8,7 @@
 class GameObject
 {
 public:
-    GameObject(GameObject *parent, Mesh mesh, Transform transform, float vit);
+    GameObject(GameObject *parent, Mesh mesh, Transform transform, Collider c);
     GameObject();
     ~GameObject();
     void transformObj(QMatrix4x4 *mat, int type, int indice);
@@ -17,9 +17,6 @@ public:
     GameObject *parent;
     Mesh mesh;
     Transform transform;
-    float angle;
-    float vit;
-
     Collider collide;
 
 

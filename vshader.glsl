@@ -18,7 +18,6 @@ void main()
         v_position = a_position.xyz;
 
     vec4 color = texture2D(texture, a_texcoord);
-    //v_position.y =color.g*1.5;
     gl_Position = mvp_matrix * transformation * vec4(v_position,1.);
 
    // Pass texture coordinate to fragment shader

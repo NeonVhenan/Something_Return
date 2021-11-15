@@ -65,23 +65,23 @@ GeometryEngine::GeometryEngine()
     arrayBuf.create();
     indexBuf.create();
 
-    monde = new GameObject(NULL, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), 0.0);
+    monde = new GameObject(NULL, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f);
     monde->arrayBuf.create();
     monde->indexBuf.create();
 
-    soleil = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 5.0f), 0.000000347 * M_PI / 180 * 10);
-    soleil->arrayBuf.create();
-    soleil->indexBuf.create();
+    mur1 = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 5.0f)));
+    mur1->arrayBuf.create();
+    mur1->indexBuf.create();
 
-    objet1 = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(1.0f,0.0f,0.0f), 1.0f), 1.0 * M_PI / 180 * 10);
+    objet1 = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(1.0f,0.0f,0.0f), 1.0f));
     objet1->arrayBuf.create();
     objet1->indexBuf.create();
 
-    terre = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 1.0f), 23.44 * M_PI / 180), QVector3D(1.0f,0.0f,0.0f), 3.0f/*0.009142857f*/), 1.0 * M_PI / 180 * 10);
+    terre = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 1.0f), 23.44 * M_PI / 180), QVector3D(1.0f,0.0f,0.0f), 3.0f/*0.009142857f*/));
     terre->arrayBuf.create();
     terre->indexBuf.create();
 
-    lune = new GameObject(objet1, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 1.0f), 6.68 * M_PI / 180), QVector3D(0.5f,0.0,0.0f), 1.0f/*0.002485714f*/), 13.2 * M_PI / 180 * 10);
+    lune = new GameObject(objet1, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 1.0f), 6.68 * M_PI / 180), QVector3D(0.5f,0.0,0.0f), 1.0f/*0.002485714f*/));
     lune->arrayBuf.create();
     lune->indexBuf.create();
 
@@ -107,12 +107,12 @@ void GeometryEngine::initCubeGeometry()
     terre->indexBuf.bind();
     terre->indexBuf.allocate(terre->mesh.indices,  terre->mesh.indexCount* sizeof(GLushort));
 
-    soleil->arrayBuf.bind();
-    soleil->arrayBuf.allocate(soleil->mesh.vertices, soleil->mesh.vertexNumber * sizeof(VertexData));
+    mur1->arrayBuf.bind();
+    mur1->arrayBuf.allocate(mur1->mesh.vertices, mur1->mesh.vertexNumber * sizeof(VertexData));
 
     // Transfer index data to VBO 1
-    soleil->indexBuf.bind();
-    soleil->indexBuf.allocate(soleil->mesh.indices,  soleil->mesh.indexCount* sizeof(GLushort));
+    mur1->indexBuf.bind();
+    mur1->indexBuf.allocate(mur1->mesh.indices,  mur1->mesh.indexCount* sizeof(GLushort));
 
     lune->arrayBuf.bind();
     lune->arrayBuf.allocate(lune->mesh.vertices, lune->mesh.vertexNumber * sizeof(VertexData));
@@ -128,16 +128,16 @@ void GeometryEngine::drawCubeGeometry(QOpenGLShaderProgram *program)
 {
     // Tell OpenGL which VBOs to use
    // arrayBuf = objet.arrayBuf;
-    soleil->arrayBuf.bind();
+    mur1->arrayBuf.bind();
    // indexBuf = objet.indexBuf;
-    soleil->indexBuf.bind();
+    mur1->indexBuf.bind();
 
     // Offset for position
     quintptr offset = 0;
 
     QMatrix4x4 mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
 
-    soleil->transformObj(&mat, 0, 0);
+    mur1->transformObj(&mat, 0, 0);
 
     program->setUniformValue("transformation", mat);
 
@@ -155,7 +155,7 @@ void GeometryEngine::drawCubeGeometry(QOpenGLShaderProgram *program)
     program->setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
 
     // Draw cube geometry using indices from VBO 1
-    glDrawElements(GL_TRIANGLES, soleil->indexBuf.size(), GL_UNSIGNED_SHORT, 0); //Careful update indicesNumber when creating new geometry
+    glDrawElements(GL_TRIANGLES, mur1->indexBuf.size(), GL_UNSIGNED_SHORT, 0); //Careful update indicesNumber when creating new geometry
 
     terre->arrayBuf.bind();
    // indexBuf = objet.indexBuf;
