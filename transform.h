@@ -1,6 +1,7 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 
+
 #include <QOpenGLFunctions_3_1>
 #include <QVector3D>
 #include <QQuaternion>
@@ -13,12 +14,12 @@ public:
     Transform(QQuaternion rotation, QVector3D translation, float scale);
     ~Transform();
     void addTranslation(QVector3D translation);
-    void addRotation(QQuaternion rotation);
+    void addRotation(float angle);
 
     QQuaternion rotation;
-    QQuaternion rotationSpe;
     QVector3D translation;
     float scale;
+    float angle;
 
     void transform(QMatrix4x4 *mat);
 

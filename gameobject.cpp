@@ -1,14 +1,13 @@
 #include "gameobject.h"
 
+
 GameObject::GameObject(GameObject *parent, Mesh mesh, Transform transform, Collider c): indexBuf(QOpenGLBuffer::IndexBuffer)
 {
     this->parent = parent;
     this->mesh = mesh;
     this->transform = transform;
     this->collide = c;
-
-//    arrayBuf.create();
-//    indexBuf.create();
+    this->child = QList<GameObject*>();
 }
 
 GameObject::GameObject(){}

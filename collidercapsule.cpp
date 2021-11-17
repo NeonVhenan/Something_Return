@@ -1,5 +1,6 @@
 #include "collidercapsule.h"
 
+
 ColliderCapsule::ColliderCapsule()
 {
 

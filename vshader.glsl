@@ -1,6 +1,7 @@
 #version 140
 
-uniform mat4 mvp_matrix;
+
+uniform mat4 vp_matrix;
 uniform mat4 transformation;
 
 in vec4 a_position;
@@ -17,8 +18,8 @@ void main()
     // Calculate vertex position in screen space
         v_position = a_position.xyz;
 
-    vec4 color = texture2D(texture, a_texcoord);
-    gl_Position = mvp_matrix * transformation * vec4(v_position,1.);
+
+    gl_Position = vp_matrix * transformation * vec4(v_position,1.);
 
    // Pass texture coordinate to fragment shader
     // Value will be automatically interpolated to fragments inside polygon faces

@@ -56,6 +56,7 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
 
+
 class GeometryEngine : protected QOpenGLFunctions_3_1
 {
 public:
@@ -71,15 +72,8 @@ private:
     void initCubeGeometry();
 
 
-    GameObject* mur1;
-    GameObject* mur2;
-    GameObject* mur3;
-    GameObject* mur4;
-
-    GameObject* mur5;
-    GameObject* mur6;
-    GameObject* mur7;
-    GameObject* mur8;
+    GameObject* couloir;
+    GameObject* couloir2;
 
 
 

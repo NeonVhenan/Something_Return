@@ -5,6 +5,9 @@
 #include "transform.h"
 #include "collider.h"
 
+#include <QList>
+
+
 class GameObject
 {
 public:
@@ -22,6 +25,8 @@ public:
 
     QOpenGLBuffer arrayBuf;
     QOpenGLBuffer indexBuf;
+
+    QList<GameObject*> child;
 };
 
 #endif // GAMEOBJECT_H

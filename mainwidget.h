@@ -51,6 +51,7 @@
 #ifndef MAINWIDGET_H
 #define MAINWIDGET_H
 
+
 #include "geometryengine.h"
 
 #include <QOpenGLWidget>
@@ -110,6 +111,8 @@ private:
 
     int type = 0;
     float angle = 0.0;
+
+    bool course = false;
 };
 
 #endif // MAINWIDGET_H

@@ -49,10 +49,10 @@
 ****************************************************************************/
 
 #include "mainwidget.h"
-
 #include <QMouseEvent>
-
 #include <math.h>
+
+
 
 MainWidget::MainWidget(QWidget *parent) :
     QOpenGLWidget(parent),
@@ -131,47 +131,64 @@ void MainWidget::timerEvent(QTimerEvent *)
 //! [1]
 
 void MainWidget::keyPressEvent(QKeyEvent *e){
+    float d;
+    if(e->key() == Qt::Key_Shift){
+        printf("hello\n");
+        if(!course)
+            course = true;
+        else  {
+            course =false;
+        }
+    }
     if(e->key() == Qt::Key_Up){
-        //translationZ +=0.1;
+        if(!course)
+            d = 0.1;
+        else {
+            d = 0.3;
+        }
         int val = rotateY % 360;
         switch(val){
         case 90 :
-            GeometryEngine::monde->transform.addTranslation(QVector3D(-0.1f, 0.0f, 0.0f));
+            GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
             break;
         case 180 :
-            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -0.1f));
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
             break;
         case 270 :
-            GeometryEngine::monde->transform.addTranslation(QVector3D(0.1f, 0.0f, 0.0f));
+            GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
             break;
         default :
-            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, 0.1f));
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
             break;
         }
     }
     if(e->key() == Qt::Key_Left){
         rotateY +=270;
-        GeometryEngine::monde->transform.addRotation(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f),-90));
+        GeometryEngine::monde->transform.addRotation(-90);
     }
     if(e->key() == Qt::Key_Right){
         rotateY +=90;
-        GeometryEngine::monde->transform.addRotation(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f),-90));
+        GeometryEngine::monde->transform.addRotation(90);
     }
     if(e->key() == Qt::Key_Down){
-        //translationZ -= 0.1;
+        if(!course)
+            d = 0.1;
+        else {
+            d = 0.3;
+        }
         int val = rotateY % 360;
         switch(val){
         case 90 :
-            GeometryEngine::monde->transform.addTranslation(QVector3D(0.1f, 0.0f, 0.0f));
+            GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
             break;
         case 180 :
-            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, 0.1f));
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
             break;
         case 270 :
-            GeometryEngine::monde->transform.addTranslation(QVector3D(-0.1f, 0.0f, 0.0f));
+            GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
             break;
         default :
-            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -0.1f));
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
             break;
         }
     }
@@ -198,7 +215,7 @@ void MainWidget::initializeGL()
 
 //! [2]
 
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 
     geometries = new GeometryEngine;
@@ -243,43 +260,6 @@ void MainWidget::initTextures()
     // Wrap texture coordinates by repeating
     // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
     texture->setWrapMode(QOpenGLTexture::Repeat);
-
-    texture1 = new QOpenGLTexture(QImage(":/grass.png").mirrored());
-
-    // Set nearest filtering mode for texture minification
-    texture1->setMinificationFilter(QOpenGLTexture::Nearest);
-
-    // Set bilinear filtering mode for texture magnification
-    texture1->setMagnificationFilter(QOpenGLTexture::Linear);
-
-    // Wrap texture coordinates by repeating
-    // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
-    texture1->setWrapMode(QOpenGLTexture::Repeat);
-
-    texture2 = new QOpenGLTexture(QImage(":/rock.png").mirrored());
-
-    // Set nearest filtering mode for texture minification
-    texture2->setMinificationFilter(QOpenGLTexture::Nearest);
-
-    // Set bilinear filtering mode for texture magnification
-    texture2->setMagnificationFilter(QOpenGLTexture::Linear);
-
-    // Wrap texture coordinates by repeating
-    // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
-    texture2->setWrapMode(QOpenGLTexture::Repeat);
-
-
-    texture3 = new QOpenGLTexture(QImage(":/snowrocks.png").mirrored());
-
-    // Set nearest filtering mode for texture minification
-    texture3->setMinificationFilter(QOpenGLTexture::Nearest);
-
-    // Set bilinear filtering mode for texture magnification
-    texture3->setMagnificationFilter(QOpenGLTexture::Linear);
-
-    // Wrap texture coordinates by repeating
-    // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
-    texture3->setWrapMode(QOpenGLTexture::Repeat);
 }
 //! [4]
 
@@ -306,51 +286,26 @@ void MainWidget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     texture->bind(0);
-    texture1->bind(1);
+    /*texture1->bind(1);
     texture2->bind(2);
-    texture3->bind(3);
+    texture3->bind(3);*/
 
 //! [6]
     QMatrix4x4 matrix;
 
     matrix.translate(0.0, -2.0, 0.0);
 
-    //matrix.rotate(QQuaternion::fromAxisAndAngle(QVector3D(0.0, 1.0, 0.0), rotateY));
-    /*int tmp;
-    int val = rotateY % 360;
-    switch(val){
-    case 90 :
-        tmp = translationX;
-        translationX = -translationZ;
-        translationZ = tmp;
-        break;
-    case 180 :
-        translationX = -translationX;
-        translationZ = -translationZ;
-        break;
-    case 270 :
-        tmp = -translationX;
-        translationX = translationZ;
-        translationZ = tmp;
-        break;
-    default :
-        break;
-    }*/
-    //QVector3D t = QQuaternion::fromAxisAndAngle(QVector3D(0.0, 1.0, 0.0), rotateY) * QVector3D(translationX, 0.0, translationZ);
-    //matrix.translate(t);
-    matrix.rotate(rotation);
-
 
 
     // Set modelview-projection matrix
-    program.setUniformValue("mvp_matrix", projection * matrix);
+    program.setUniformValue("vp_matrix", projection * matrix);
 
 
     // Use texture unit 0 which contains cube.png
     program.setUniformValue("texture", 0);
-    program.setUniformValue("texture1", 1);
+    /*program.setUniformValue("texture1", 1);
     program.setUniformValue("texture2", 2);
-    program.setUniformValue("texture3", 3);
+    program.setUniformValue("texture3", 3);*/
 
     // Draw cube geometry
     geometries->drawCubeGeometry(&program);
