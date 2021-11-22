@@ -1,23 +1,11 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include "gameobject.h"
 
-class Scene
+class scene
 {
-private:
-    QString *name;
-    QList *objectList;
-
 public:
-    Scene();
-    virtual ~Scene();
-   // Scene(GameObject *object);
-
-  //  void generateListObject(QList *sceneObjects);
-
-
-
+    scene();
 };
 
 #endif // SCENE_H
