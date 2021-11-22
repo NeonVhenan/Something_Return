@@ -140,7 +140,7 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
             course =false;
         }
     }
-    if(e->key() == Qt::Key_Up){
+    if(e->key() == Qt::Key_Z){
         if(!course)
             d = 0.1;
         else {
@@ -164,13 +164,13 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
     }
     if(e->key() == Qt::Key_Left){
         rotateY +=270;
-        GeometryEngine::monde->transform.addRotation(-90);
+        GeometryEngine::monde->transform.addRotation(rotateY);
     }
     if(e->key() == Qt::Key_Right){
         rotateY +=90;
-        GeometryEngine::monde->transform.addRotation(90);
+        GeometryEngine::monde->transform.addRotation(rotateY);
     }
-    if(e->key() == Qt::Key_Down){
+    if(e->key() == Qt::Key_S){
         if(!course)
             d = 0.1;
         else {
@@ -189,6 +189,51 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
             break;
         default :
             GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            break;
+        }
+    }
+
+    if(e->key() == Qt::Key_Q){
+        if(!course)
+            d = 0.1;
+        else {
+            d = 0.3;
+        }
+        int val = rotateY % 360;
+        switch(val){
+        case 90 :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            break;
+        case 180 :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
+            break;
+        case 270 :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
+            break;
+        default :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
+            break;
+        }
+    }
+    if(e->key() == Qt::Key_D){
+        if(!course)
+            d = 0.1;
+        else {
+            d = 0.3;
+        }
+        int val = rotateY % 360;
+        switch(val){
+        case 90 :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
+            break;
+        case 180 :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
+            break;
+        case 270 :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            break;
+        default :
+            GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
             break;
         }
     }
@@ -293,7 +338,7 @@ void MainWidget::paintGL()
 //! [6]
     QMatrix4x4 matrix;
 
-    matrix.translate(0.0, -2.0, 0.0);
+    matrix.translate(0.0, -3.5, 0.0);
 
 
 

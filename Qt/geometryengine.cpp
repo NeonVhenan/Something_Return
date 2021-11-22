@@ -77,14 +77,13 @@ GeometryEngine::GeometryEngine()
 
     monde->child->append(couloir);
 
-    /*couloir2 = new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(0.0f,0.0f,-20.0f), 1.0f), Collider());
+    couloir2 = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,-20.0f), 1.0f), Collider());
     couloir2->arrayBuf.create();
     couloir2->indexBuf.create();
 
-    monde->child.append(couloir2);*/
+    monde->child->append(couloir2);
 
 
-    // Initializes cube geometry and transfers it to VBOs
     initCubeGeometry();
 
 }
@@ -101,7 +100,6 @@ void GeometryEngine::initCubeGeometry()
     monde->arrayBuf.bind();
     monde->arrayBuf.allocate(monde->mesh.vertices, monde->mesh.vertexNumber * sizeof(VertexData));
 
-    // Transfer index data to VBO 1
     monde->indexBuf.bind();
     monde->indexBuf.allocate(monde->mesh.indices,  monde->mesh.indexCount* sizeof(GLushort));
 
@@ -109,16 +107,15 @@ void GeometryEngine::initCubeGeometry()
     couloir->arrayBuf.bind();
     couloir->arrayBuf.allocate(couloir->mesh.vertices, couloir->mesh.vertexNumber * sizeof(VertexData));
 
-    // Transfer index data to VBO 1
     couloir->indexBuf.bind();
     couloir->indexBuf.allocate(couloir->mesh.indices,  couloir->mesh.indexCount* sizeof(GLushort));
 
-    /*couloir2->arrayBuf.bind();
+
+    couloir2->arrayBuf.bind();
     couloir2->arrayBuf.allocate(couloir2->mesh.vertices, couloir2->mesh.vertexNumber * sizeof(VertexData));
 
-    // Transfer index data to VBO 1
     couloir2->indexBuf.bind();
-    couloir2->indexBuf.allocate(couloir2->mesh.indices,  couloir2->mesh.indexCount* sizeof(GLushort));*/
+    couloir2->indexBuf.allocate(couloir2->mesh.indices,  couloir2->mesh.indexCount* sizeof(GLushort));
 
 //! [1]
 }
@@ -133,17 +130,14 @@ void GeometryEngine::draw(QOpenGLShaderProgram *program)
 
     int texcoordLocation = program->attributeLocation("a_texcoord");
 
-   drawGameObject(program, offset, mat, vertexLocation, texcoordLocation, monde);
+    drawGameObject(program, offset, mat, vertexLocation, texcoordLocation, monde);
 }
 
 
 void GeometryEngine::drawGameObject(QOpenGLShaderProgram *program, quintptr offset, QMatrix4x4 mat, int vertexLocation, int texcoordLocation, GameObject* obj){
     if(obj->mesh.vertexNumber != 0){
         obj->arrayBuf.bind();
-       // indexBuf = objet.indexBuf;
         obj->indexBuf.bind();
-
-        // Offset for position
 
         offset = 0;
 
@@ -153,21 +147,17 @@ void GeometryEngine::drawGameObject(QOpenGLShaderProgram *program, quintptr offs
 
         program->setUniformValue("transformation", mat);
 
-        // Tell OpenGL programmable pipeline how to locate vertex position data
         vertexLocation = program->attributeLocation("a_position");
         program->enableAttributeArray(vertexLocation);
         program->setAttributeBuffer(vertexLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
 
-        // Offset for texture coordinate
         offset += sizeof(QVector3D);
 
-        // Tell OpenGL programmable pipeline how to locate vertex texture coordinate data
         texcoordLocation = program->attributeLocation("a_texcoord");
         program->enableAttributeArray(texcoordLocation);
         program->setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
 
-        // Draw cube geometry using indices from VBO 1
-        glDrawElements(GL_TRIANGLES, obj->indexBuf.size(), GL_UNSIGNED_SHORT, 0); //Careful update indicesNumber when creating new geometry
+        glDrawElements(GL_TRIANGLES, obj->indexBuf.size(), GL_UNSIGNED_SHORT, 0);
     }
     if(!obj->child->isEmpty()){
         for(int i = 0; i < obj->child->size(); i++){

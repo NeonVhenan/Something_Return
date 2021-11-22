@@ -2,10 +2,10 @@
 #define SCENE_H
 
 
-class scene
+class Scene
 {
 public:
-    scene();
+    Scene();
 };
 
 #endif // SCENE_H
