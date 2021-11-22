@@ -19,7 +19,7 @@ public:
     virtual ~Scene();
    // Scene(GameObject *object);
 
-  //  void generateListObject(QList *sceneObjects);
+    void generateListObject(QList *sceneObjects);
 
 
 
