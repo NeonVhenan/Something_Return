@@ -9,6 +9,11 @@
 
     Scene::~Scene() { }
 
+    void generateListObject(QList *sceneObjects) {
+
+        QFile file;
+    }
+
     /*
      * Créer une arborescence suivant ce modèle :
      * lire dans un dossier le nom des GameObjects à charger
