@@ -1,6 +1,11 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include <QDir>
+#include <QFile>
+#include <QString>
+#include <QList>
+
 #include "gameobject.h"
 
 class Scene
