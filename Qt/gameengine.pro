@@ -9,8 +9,8 @@ SOURCES += main.cpp \
     collidercapsule.cpp \
     gameobject.cpp \
     mesh.cpp \
-    scene.cpp \
-    transform.cpp
+    transform.cpp \
+    scene.cpp
 
 SOURCES += \
     mainwidget.cpp \
@@ -24,8 +24,8 @@ HEADERS += \
     mainwidget.h \
     geometryengine.h \
     mesh.h \
-    scene.h \
-    transform.h
+    transform.h \
+    scene.h
 
 RESOURCES += \
     shaders.qrc \
