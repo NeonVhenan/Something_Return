@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>grass.png</file>
+        <file>Heightmap_Mountain.png</file>
+        <file>rock.png</file>
+        <file>snowrocks.png</file>
+    </qresource>
+</RCC>
