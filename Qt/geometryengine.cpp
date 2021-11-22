@@ -226,7 +226,7 @@ void GeometryEngine::drawGameObject(QOpenGLShaderProgram *program, quintptr offs
 }
 
 bool GeometryEngine::testCollision(GameObject * obj){
-    if(/*colision*/){//test collision sans oublié le transform
+    if(/*colision*/){//test collision sans oublié le transform bloc/bloc
 
         if(!obj->child->isEmpty()){
             for(int i =0 ; i < obj->child->size(); i++){
