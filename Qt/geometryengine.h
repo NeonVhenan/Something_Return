@@ -64,7 +64,8 @@ public:
     virtual ~GeometryEngine();
     static GameObject* monde;
 
-    void drawCubeGeometry(QOpenGLShaderProgram *program);
+    void draw(QOpenGLShaderProgram *program);
+        void drawGameObject(QOpenGLShaderProgram *program, quintptr offset, QMatrix4x4 mat, int vertexLocation, int texcoordLocation, GameObject * obj);
 
 
 

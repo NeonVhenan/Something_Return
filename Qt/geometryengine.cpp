@@ -57,7 +57,7 @@
 #define M_PI 3.1415926535897932384626433832795
 
 
-GameObject * GeometryEngine::monde = new GameObject(NULL, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), Collider());
+GameObject * GeometryEngine::monde = new GameObject(NULL, Mesh(0), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), Collider());
 
 //! [0]
 GeometryEngine::GeometryEngine()
@@ -75,7 +75,7 @@ GeometryEngine::GeometryEngine()
     couloir->arrayBuf.create();
     couloir->indexBuf.create();
 
-    monde->child.append(couloir);
+    monde->child->append(couloir);
 
     /*couloir2 = new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(0.0f,0.0f,-20.0f), 1.0f), Collider());
     couloir2->arrayBuf.create();
@@ -98,6 +98,14 @@ GeometryEngine::~GeometryEngine()
 
 void GeometryEngine::initCubeGeometry()
 {
+    monde->arrayBuf.bind();
+    monde->arrayBuf.allocate(monde->mesh.vertices, monde->mesh.vertexNumber * sizeof(VertexData));
+
+    // Transfer index data to VBO 1
+    monde->indexBuf.bind();
+    monde->indexBuf.allocate(monde->mesh.indices,  monde->mesh.indexCount* sizeof(GLushort));
+
+
     couloir->arrayBuf.bind();
     couloir->arrayBuf.allocate(couloir->mesh.vertices, couloir->mesh.vertexNumber * sizeof(VertexData));
 
@@ -115,36 +123,55 @@ void GeometryEngine::initCubeGeometry()
 //! [1]
 }
 
-//! [2]v_position
-void GeometryEngine::drawCubeGeometry(QOpenGLShaderProgram *program)
+void GeometryEngine::draw(QOpenGLShaderProgram *program)
 {
-    quintptr offset;
-    QMatrix4x4 mat;
-    int vertexLocation;
-    int texcoordLocation;
-    // Tell OpenGL which VBOs to use
-    for(int i =0; i < monde->child.size(); i++){
-        monde->child[i]->arrayBuf.bind();
-        monde->child[i]->indexBuf.bind();
+    quintptr offset = 0;
+
+    QMatrix4x4 mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
+
+    int vertexLocation = program->attributeLocation("a_position");
+
+    int texcoordLocation = program->attributeLocation("a_texcoord");
+
+   drawGameObject(program, offset, mat, vertexLocation, texcoordLocation, monde);
+}
+
+
+void GeometryEngine::drawGameObject(QOpenGLShaderProgram *program, quintptr offset, QMatrix4x4 mat, int vertexLocation, int texcoordLocation, GameObject* obj){
+    if(obj->mesh.vertexNumber != 0){
+        obj->arrayBuf.bind();
+       // indexBuf = objet.indexBuf;
+        obj->indexBuf.bind();
+
+        // Offset for position
 
         offset = 0;
 
         mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
 
-        monde->child[i]->transformObj(&mat, 0, 0);
+        obj->transformObj(&mat);
 
         program->setUniformValue("transformation", mat);
 
+        // Tell OpenGL programmable pipeline how to locate vertex position data
         vertexLocation = program->attributeLocation("a_position");
         program->enableAttributeArray(vertexLocation);
         program->setAttributeBuffer(vertexLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
 
+        // Offset for texture coordinate
         offset += sizeof(QVector3D);
 
+        // Tell OpenGL programmable pipeline how to locate vertex texture coordinate data
         texcoordLocation = program->attributeLocation("a_texcoord");
         program->enableAttributeArray(texcoordLocation);
         program->setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
 
-        glDrawElements(GL_TRIANGLES, monde->child[i]->indexBuf.size(), GL_UNSIGNED_SHORT, 0); //Careful update indicesNumber when creating new geometry
+        // Draw cube geometry using indices from VBO 1
+        glDrawElements(GL_TRIANGLES, obj->indexBuf.size(), GL_UNSIGNED_SHORT, 0); //Careful update indicesNumber when creating new geometry
+    }
+    if(!obj->child->isEmpty()){
+        for(int i = 0; i < obj->child->size(); i++){
+            drawGameObject(program, offset, mat, vertexLocation, texcoordLocation, obj->child->value(i));
+        }
     }
 }

@@ -3,6 +3,14 @@
 Mesh::Mesh(int indice)
 {
     switch(indice){
+    case 0 :
+        this->vertexNumber = 0;
+        this->indexCount = 0;
+
+        this->vertices = new VertexData[this->vertexNumber];
+        this->indices = new GLushort[this->indexCount];
+
+        break;
     case 1 :
         this->vertexNumber = 16;
         this->indexCount = 24;
@@ -12,7 +20,6 @@ Mesh::Mesh(int indice)
         vertices[1] =   {QVector3D( 2.0f, 4.0f, -20.0f), QVector2D(1.0f, 1.0f)};
         vertices[2] =   {QVector3D( 2.0f, 4.0f, 0.0f), QVector2D(1.0f, 1.0f)};
         vertices[3] =   {QVector3D( 2.0f, 0.0f, 0.0f), QVector2D(1.0f, 1.0f)};
-
 
         vertices[4] =   {QVector3D( -2.0f, 0.0f, -20.0f), QVector2D(1.0f, 0.0f)};
         vertices[5] =   {QVector3D( -2.0f, 4.0f, -20.0f), QVector2D(1.0f, 0.0f)};

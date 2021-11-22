@@ -308,6 +308,6 @@ void MainWidget::paintGL()
     program.setUniformValue("texture3", 3);*/
 
     // Draw cube geometry
-    geometries->drawCubeGeometry(&program);
+    geometries->draw(&program);
 }
 

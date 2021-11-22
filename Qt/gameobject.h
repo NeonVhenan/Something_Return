@@ -14,7 +14,7 @@ public:
     GameObject(GameObject *parent, Mesh mesh, Transform transform, Collider c);
     GameObject();
     ~GameObject();
-    void transformObj(QMatrix4x4 *mat, int type, int indice);
+    void transformObj(QMatrix4x4 *mat);
     void anime(QMatrix4x4 *mat);
 
     GameObject *parent;
@@ -26,7 +26,7 @@ public:
     QOpenGLBuffer arrayBuf;
     QOpenGLBuffer indexBuf;
 
-    QList<GameObject*> child;
+    QList<GameObject*> * child;
 };
 
 #endif // GAMEOBJECT_H
