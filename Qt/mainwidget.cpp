@@ -149,15 +149,27 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
         switch(val){
         case 90 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
+            }
             break;
         case 180 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(0.0, 0.0f, d));
+            }
             break;
         case 270 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
+            }
             break;
         default :
             GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            }
             break;
         }
     }
@@ -179,15 +191,27 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
         switch(val){
         case 90 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
+            }
             break;
         case 180 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            }
             break;
         case 270 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
+            }
             break;
         default :
             GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
+            }
             break;
         }
     }
@@ -202,15 +226,27 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
         switch(val){
         case 90 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            }
             break;
         case 180 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
+            }
             break;
         case 270 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
+            }
             break;
         default :
             GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
+            }
             break;
         }
     }
@@ -224,15 +260,27 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
         switch(val){
         case 90 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
+            }
             break;
         case 180 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
+            }
             break;
         case 270 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            }
             break;
         default :
             GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
+            if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
+            }
             break;
         }
     }

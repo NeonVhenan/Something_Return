@@ -65,8 +65,10 @@ public:
     static GameObject* monde;
 
     void draw(QOpenGLShaderProgram *program);
-        void drawGameObject(QOpenGLShaderProgram *program, quintptr offset, QMatrix4x4 mat, int vertexLocation, int texcoordLocation, GameObject * obj);
+    void drawGameObject(QOpenGLShaderProgram *program, quintptr offset, QMatrix4x4 mat, int vertexLocation, int texcoordLocation, GameObject * obj);
 
+    bool testCollision();
+    bool collision(GameObject * obj);
 
 
 private:

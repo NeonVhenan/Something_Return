@@ -218,3 +218,20 @@ void GeometryEngine::drawGameObject(QOpenGLShaderProgram *program, quintptr offs
         }
     }
 }
+
+bool GeometryEngine::testCollision(GameObject * obj){
+    if(/*colision*/){
+        if(!obj->child->isEmpty()){
+            for(int i =0 ; i < obj->child->size(); i++){
+                if(testCollision(obj->child[i]))
+                    return true;
+            }
+            return false;
+        }
+        else
+            return true;
+    }
+    else {
+        return false;
+    }
+}
