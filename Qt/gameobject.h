@@ -4,6 +4,8 @@
 #include "mesh.h"
 #include "transform.h"
 #include "collider.h"
+#include "colliderbox.h"
+#include "collidercapsule.h"
 
 #include <QList>
 

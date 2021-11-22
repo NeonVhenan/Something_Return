@@ -67,21 +67,48 @@ GeometryEngine::GeometryEngine()
     arrayBuf.create();
     indexBuf.create();
 
+    monde->arrayBuf.create();
+    monde->indexBuf.create();
 
     monde->arrayBuf.create();
     monde->indexBuf.create();
 
-    couloir = new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), Collider());
-    couloir->arrayBuf.create();
-    couloir->indexBuf.create();
+    couloirDroit = new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, 0.0), QVector3D(3.5, 6.0, 0.0), QVector3D(3.5, 6.0, -20.0), QVector3D(3.5, 0.0,-20.0), QVector3D(4.5, 0.0, 0.0), QVector3D(4.5, 6.0, 0.0), QVector3D(4.5, 6.0, -20.0), QVector3D(4.5, 0.0,-20.0)));
+    couloirDroit->arrayBuf.create();
+    couloirDroit->indexBuf.create();
 
-    monde->child->append(couloir);
+    monde->child->append(couloirDroit);
 
-    couloir2 = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), Collider());
-    couloir2->arrayBuf.create();
-    couloir2->indexBuf.create();
+    couloirGauche = new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(-3.5, 0.0, 0.0), QVector3D(-3.5, 4.0, 0.0), QVector3D(-3.5, 4.0, -20.0), QVector3D(-3.5, 0.0,-20.0), QVector3D(-4.5, 0.0, 0.0), QVector3D(-4.5, 6.0, 0.0), QVector3D(-4.5, 6.0, -20.0), QVector3D(-4.5, 0.0,-20.0)));
+    couloirGauche->arrayBuf.create();
+    couloirGauche->indexBuf.create();
 
-    monde->child->append(couloir2);
+    monde->child->append(couloirGauche);
+
+    couloirDroit2 = new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(0.0, 0.0, -27.5), QVector3D(0.0, 4.0, -27.5), QVector3D(-20.0, 4.0, -27.5), QVector3D(-20.0, 0.0,-27.5), QVector3D(0.0, 0.0, -28.5), QVector3D(0.0, 4.0, -28.5), QVector3D(-20.0, 4.0, -28.5), QVector3D(-20.0, 0.0,-28.5)));
+    couloirDroit2->arrayBuf.create();
+    couloirDroit2->indexBuf.create();
+
+    monde->child->append(couloirDroit2);
+
+    couloirGauche2 = new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,-4.0f), 1.0f), ColliderBox(QVector3D(-4.0, 0.0, -20.5), QVector3D(-4.0, 4.0, -20.5), QVector3D(-20.0, 4.0, -20.5), QVector3D(-20.0, 0.0,-20.5), QVector3D(-4.0, 0.0, -19.5), QVector3D(-4.0, 4.0, -19.5), QVector3D(-20.0, 4.0, -19.5), QVector3D(-20.0, 0.0,-19.5)));
+    couloirGauche2->arrayBuf.create();
+    couloirGauche2->indexBuf.create();
+
+    monde->child->append(couloirGauche2);
+
+    couloirDroit3 = new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,20.0f), 1.0f), ColliderBox(QVector3D(0.0, 0.0, -27.5), QVector3D(0.0, 4.0, -27.5), QVector3D(-20.0, 4.0, -27.5), QVector3D(-20.0, 0.0,-27.5), QVector3D(0.0, 0.0, -28.5), QVector3D(0.0, 4.0, -28.5), QVector3D(-20.0, 4.0, -28.5), QVector3D(-20.0, 0.0,-28.5)));
+    couloirDroit3->arrayBuf.create();
+    couloirDroit3->indexBuf.create();
+
+    monde->child->append(couloirDroit3);
+
+    couloirGauche3 = new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,24.0f), 1.0f), ColliderBox(QVector3D(-4.0, 0.0, -20.5), QVector3D(-4.0, 4.0, -20.5), QVector3D(-20.0, 4.0, -20.5), QVector3D(-20.0, 0.0,-20.5), QVector3D(-4.0, 0.0, -19.5), QVector3D(-4.0, 4.0, -19.5), QVector3D(-20.0, 4.0, -19.5), QVector3D(-20.0, 0.0,-19.5)));
+    couloirGauche3->arrayBuf.create();
+    couloirGauche3->indexBuf.create();
+
+    monde->child->append(couloirGauche3);
+
 
 
     initCubeGeometry();
@@ -104,18 +131,44 @@ void GeometryEngine::initCubeGeometry()
     monde->indexBuf.allocate(monde->mesh.indices,  monde->mesh.indexCount* sizeof(GLushort));
 
 
-    couloir->arrayBuf.bind();
-    couloir->arrayBuf.allocate(couloir->mesh.vertices, couloir->mesh.vertexNumber * sizeof(VertexData));
+    couloirDroit->arrayBuf.bind();
+    couloirDroit->arrayBuf.allocate(couloirDroit->mesh.vertices, couloirDroit->mesh.vertexNumber * sizeof(VertexData));
 
-    couloir->indexBuf.bind();
-    couloir->indexBuf.allocate(couloir->mesh.indices,  couloir->mesh.indexCount* sizeof(GLushort));
+    couloirDroit->indexBuf.bind();
+    couloirDroit->indexBuf.allocate(couloirDroit->mesh.indices,  couloirDroit->mesh.indexCount* sizeof(GLushort));
+
+    couloirGauche->arrayBuf.bind();
+    couloirGauche->arrayBuf.allocate(couloirGauche->mesh.vertices, couloirGauche->mesh.vertexNumber * sizeof(VertexData));
+
+    couloirGauche->indexBuf.bind();
+    couloirGauche->indexBuf.allocate(couloirGauche->mesh.indices,  couloirGauche->mesh.indexCount* sizeof(GLushort));
 
 
-    couloir2->arrayBuf.bind();
-    couloir2->arrayBuf.allocate(couloir2->mesh.vertices, couloir2->mesh.vertexNumber * sizeof(VertexData));
+    couloirDroit2->arrayBuf.bind();
+    couloirDroit2->arrayBuf.allocate(couloirDroit2->mesh.vertices, couloirDroit2->mesh.vertexNumber * sizeof(VertexData));
 
-    couloir2->indexBuf.bind();
-    couloir2->indexBuf.allocate(couloir2->mesh.indices,  couloir2->mesh.indexCount* sizeof(GLushort));
+    couloirDroit2->indexBuf.bind();
+    couloirDroit2->indexBuf.allocate(couloirDroit2->mesh.indices,  couloirDroit2->mesh.indexCount* sizeof(GLushort));
+
+
+    couloirGauche2->arrayBuf.bind();
+    couloirGauche2->arrayBuf.allocate(couloirGauche2->mesh.vertices, couloirGauche2->mesh.vertexNumber * sizeof(VertexData));
+
+    couloirGauche2->indexBuf.bind();
+    couloirGauche2->indexBuf.allocate(couloirGauche2->mesh.indices,  couloirGauche2->mesh.indexCount* sizeof(GLushort));
+
+    couloirDroit3->arrayBuf.bind();
+    couloirDroit3->arrayBuf.allocate(couloirDroit3->mesh.vertices, couloirDroit3->mesh.vertexNumber * sizeof(VertexData));
+
+    couloirDroit3->indexBuf.bind();
+    couloirDroit3->indexBuf.allocate(couloirDroit3->mesh.indices,  couloirDroit3->mesh.indexCount* sizeof(GLushort));
+
+
+    couloirGauche3->arrayBuf.bind();
+    couloirGauche3->arrayBuf.allocate(couloirGauche3->mesh.vertices, couloirGauche3->mesh.vertexNumber * sizeof(VertexData));
+
+    couloirGauche3->indexBuf.bind();
+    couloirGauche3->indexBuf.allocate(couloirGauche3->mesh.indices,  couloirGauche3->mesh.indexCount* sizeof(GLushort));
 
 //! [1]
 }

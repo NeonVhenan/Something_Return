@@ -73,8 +73,12 @@ private:
     void initCubeGeometry();
 
 
-    GameObject* couloir;
-    GameObject* couloir2;
+    GameObject* couloirDroit;
+    GameObject* couloirGauche;
+    GameObject* couloirDroit2;
+    GameObject* couloirGauche2;
+    GameObject* couloirDroit3;
+    GameObject* couloirGauche3;
 
 
 

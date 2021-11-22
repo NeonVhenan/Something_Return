@@ -133,7 +133,6 @@ void MainWidget::timerEvent(QTimerEvent *)
 void MainWidget::keyPressEvent(QKeyEvent *e){
     float d;
     if(e->key() == Qt::Key_Shift){
-        printf("hello\n");
         if(!course)
             course = true;
         else  {
