@@ -9,6 +9,7 @@ SOURCES += main.cpp \
     collidercapsule.cpp \
     gameobject.cpp \
     mesh.cpp \
+    scene.cpp \
     transform.cpp
 
 SOURCES += \
@@ -23,6 +24,7 @@ HEADERS += \
     mainwidget.h \
     geometryengine.h \
     mesh.h \
+    scene.h \
     transform.h
 
 RESOURCES += \

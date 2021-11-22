@@ -72,23 +72,23 @@ Mesh::Mesh(int indice)
         this->indexCount = 24;
 
         this->vertices = new VertexData[this->vertexNumber];
-        vertices[0] =   {QVector3D( -20.0f, 0.0f, -24.0f), QVector2D(1.0f, 1.0f)};
-        vertices[1] =   {QVector3D( -20.0f, 4.0f, -24.0f), QVector2D(1.0f, 1.0f)};
-        vertices[2] =   {QVector3D( 0.0f, 4.0f, -24.0f), QVector2D(1.0f, 1.0f)};
-        vertices[3] =   {QVector3D( 0.0f, 0.0f, -24.0f), QVector2D(1.0f, 1.0f)};
+        vertices[0] =   {QVector3D( -20.0f, 0.0f, -28.0f), QVector2D(0.5f, 0.5f)};
+        vertices[1] =   {QVector3D( -20.0f, 6.0f, -28.0f), QVector2D(0.5f, 0.5f)};
+        vertices[2] =   {QVector3D( 0.0f, 6.0f, -28.0f), QVector2D(0.5f, 0.5f)};
+        vertices[3] =   {QVector3D( 0.0f, 0.0f, -28.0f), QVector2D(0.5f, 0.5f)};
 
-        vertices[4] =   {QVector3D( -20.0f, 0.0f, -20.0f), QVector2D(1.0f, 0.0f)};
-        vertices[5] =   {QVector3D( -20.0f, 4.0f, -20.0f), QVector2D(1.0f, 0.0f)};
-        vertices[6] =   {QVector3D( -2.0f, 4.0f, -20.0f), QVector2D(1.0f, 0.0f)};
-        vertices[7] =   {QVector3D( -2.0f, 0.0f, -20.0f), QVector2D(1.0f, 0.0f)};
+        vertices[4] =   {QVector3D( -20.0f, 0.0f, -20.0f), QVector2D(0.5f, 0.0f)};
+        vertices[5] =   {QVector3D( -20.0f, 6.0f, -20.0f), QVector2D(0.5f, 0.0f)};
+        vertices[6] =   {QVector3D( -4.0f, 6.0f, -20.0f), QVector2D(0.5f, 0.0f)};
+        vertices[7] =   {QVector3D( -4.0f, 0.0f, -20.0f), QVector2D(0.5f, 0.0f)};
 
-        vertices[8] =   {QVector3D( 0.0f, 4.0f, -24.0f), QVector2D(0.0f, 1.0f)};
-        vertices[9] =   {QVector3D( -20.0f, 4.0f, -24.0f), QVector2D(0.0f, 1.0f)};
-        vertices[10] =   {QVector3D( -20.0f, 4.0f, -20.0f), QVector2D(0.0f, 1.0f)};
-        vertices[11] =   {QVector3D( 0.0f, 4.0f, -20.0f), QVector2D(0.0f, 1.0f)};
+        vertices[8] =   {QVector3D( 0.0f, 6.0f, -28.0f), QVector2D(0.0f, 0.5f)};
+        vertices[9] =   {QVector3D( -20.0f, 6.0f, -28.0f), QVector2D(0.0f, 0.5f)};
+        vertices[10] =   {QVector3D( -20.0f, 6.0f, -20.0f), QVector2D(0.0f, 0.5f)};
+        vertices[11] =   {QVector3D( 0.0f, 6.0f, -20.0f), QVector2D(0.0f, 0.5f)};
 
-        vertices[12] =   {QVector3D( 0.0f, 0.0f, -24.0f), QVector2D(0.0f, 0.0f)};
-        vertices[13] =   {QVector3D( -20.0f, 0.0f, -24.0f), QVector2D(0.0f, 0.0f)};
+        vertices[12] =   {QVector3D( 0.0f, 0.0f, -28.0f), QVector2D(0.0f, 0.0f)};
+        vertices[13] =   {QVector3D( -20.0f, 0.0f, -28.0f), QVector2D(0.0f, 0.0f)};
         vertices[14] =   {QVector3D( -20.0f, 0.0f, -20.0f), QVector2D(0.0f, 0.0f)};
         vertices[15] =   {QVector3D( 0.0f, 0.0f, -20.0f), QVector2D(0.0f, 0.0f)};
 

@@ -77,7 +77,7 @@ GeometryEngine::GeometryEngine()
 
     monde->child->append(couloir);
 
-    couloir2 = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,-20.0f), 1.0f), Collider());
+    couloir2 = new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), Collider());
     couloir2->arrayBuf.create();
     couloir2->indexBuf.create();
 

@@ -202,13 +202,13 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
         int val = rotateY % 360;
         switch(val){
         case 90 :
-            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
             break;
         case 180 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
             break;
         case 270 :
-            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
             break;
         default :
             GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
@@ -224,13 +224,13 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
         int val = rotateY % 360;
         switch(val){
         case 90 :
-            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
             break;
         case 180 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
             break;
         case 270 :
-            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
             break;
         default :
             GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
