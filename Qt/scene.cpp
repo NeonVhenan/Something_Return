@@ -5,12 +5,9 @@
 
 #include "scene.h"
 
-scene::scene()
-{
-
     Scene::Scene() { }
 
-     Scene::~Scene() { }
+    Scene::~Scene() { }
 
     /*
      * Créer une arborescence suivant ce modèle :
@@ -23,10 +20,6 @@ scene::scene()
      *
      * Mesh -> ID through ObjFile?
      */
-
-
-}
-
 /*
 
  void Scene::generateListObject(QList *sceneObjects) {
