@@ -55,7 +55,6 @@ OBJECTS_DIR   = ./
 SOURCES       = main.cpp \
 		collider.cpp \
 		colliderbox.cpp \
-		collidercapsule.cpp \
 		gameobject.cpp \
 		mesh.cpp \
 		transform.cpp \
@@ -66,7 +65,6 @@ SOURCES       = main.cpp \
 OBJECTS       = main.o \
 		collider.o \
 		colliderbox.o \
-		collidercapsule.o \
 		gameobject.o \
 		mesh.o \
 		transform.o \
@@ -151,7 +149,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		gameengine.pro collider.h \
 		colliderbox.h \
-		collidercapsule.h \
 		gameobject.h \
 		mainwidget.h \
 		geometryengine.h \
@@ -159,7 +156,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		transform.h main.cpp \
 		collider.cpp \
 		colliderbox.cpp \
-		collidercapsule.cpp \
 		gameobject.cpp \
 		mesh.cpp \
 		transform.cpp \
@@ -347,8 +343,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents shaders.qrc textures.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents collider.h colliderbox.h collidercapsule.h gameobject.h mainwidget.h geometryengine.h mesh.h transform.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp collider.cpp colliderbox.cpp collidercapsule.cpp gameobject.cpp mesh.cpp transform.cpp mainwidget.cpp geometryengine.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents collider.h colliderbox.h gameobject.h mainwidget.h geometryengine.h mesh.h transform.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp collider.cpp colliderbox.cpp gameobject.cpp mesh.cpp transform.cpp mainwidget.cpp geometryengine.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -439,10 +435,6 @@ colliderbox.o: colliderbox.cpp colliderbox.h \
 		collider.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o colliderbox.o colliderbox.cpp
 
-collidercapsule.o: collidercapsule.cpp collidercapsule.h \
-		collider.h \
-		colliderbox.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o collidercapsule.o collidercapsule.cpp
 
 gameobject.o: gameobject.cpp gameobject.h \
 		mesh.h \
