@@ -4,7 +4,6 @@ TARGET = gameengine
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    collider.cpp \
     colliderbox.cpp \
     gameobject.cpp \
     mesh.cpp \
@@ -16,7 +15,6 @@ SOURCES += \
     geometryengine.cpp
 
 HEADERS += \
-    collider.h \
     colliderbox.h \
     gameobject.h \
     mainwidget.h \
