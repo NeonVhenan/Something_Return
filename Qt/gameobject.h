@@ -5,7 +5,6 @@
 #include "transform.h"
 #include "collider.h"
 #include "colliderbox.h"
-#include "collidercapsule.h"
 
 #include <QList>
 
@@ -29,6 +28,8 @@ public:
     QOpenGLBuffer indexBuf;
 
     QList<GameObject*> * child;
+
+    void addEnfant(GameObject * obj);
 };
 
 #endif // GAMEOBJECT_H

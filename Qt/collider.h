@@ -9,6 +9,8 @@ class Collider
 {
 public:
     Collider();
+
+    bool defini = false;
 };
 
 #endif // COLLIDER_H

@@ -9,7 +9,7 @@
 
     Scene::~Scene() { }
 
-    void generateListObject(QList *sceneObjects) {
+    void generateListObject(QList<GameObject*> *sceneObjects) {
 
         QFile file;
     }

@@ -67,8 +67,7 @@ public:
     void draw(QOpenGLShaderProgram *program);
     void drawGameObject(QOpenGLShaderProgram *program, quintptr offset, QMatrix4x4 mat, int vertexLocation, int texcoordLocation, GameObject * obj);
 
-    bool testCollision();
-    bool collision(GameObject * obj);
+    static bool testCollision(GameObject * obj);
 
 
 private:

@@ -19,3 +19,15 @@ void GameObject::transformObj(QMatrix4x4 *mat){
     }
     this->transform.transform(mat);
 }
+
+
+void GameObject::addEnfant(GameObject * obj){
+    if(!collide.defini){
+        collide = obj->collide;
+        this->collide.defini = true;
+    }
+    else{
+
+    }
+    this->child->append(obj);
+}
