@@ -18,7 +18,8 @@ public:
     virtual ~Scene();
    // Scene(GameObject *object);
 
-    void generateListObject(QList<GameObject*> *sceneObjects);
+    void generateListObject(QList<GameObject*> sceneObjects, QString path);
+    Scene(QString *name);
 
 
 
