@@ -10,10 +10,10 @@
 
     Scene::~Scene() { }
 
-    Scene::Scene(QString *name) {
+    /*Scene::Scene(QString *name) {
 
         this->name = name;
-    }
+    }*/
 
     /*
      * Créer une arborescence suivant ce modèle :
@@ -46,20 +46,18 @@
       filename = "scene/scene.txt";
       QFile file(filename);
 
-      QString separator = "--------------------"
+      QString separator = "--------------------";
+      QString line;
 
       if(!file.open(QIODevice::ReadOnly)) {
             return;
       }
 
-      QTextSream in(&file);
-      QString line = in.readLine();
+      QTextStream in(&file);
 
-      while(!line.isNull() && line != separator) {
+      while(!line.isNull() && line != separator && !file.atEnd()) {
 
-          process_line(line);
           line = in.readLine();
-
           //return;
       }
 
