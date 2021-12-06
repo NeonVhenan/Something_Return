@@ -11,18 +11,16 @@ class Scene
 {
 private:
     QString *name;
+    QString path;
     QList<GameObject*> *objectList;
 
 public:
     Scene();
     virtual ~Scene();
-   // Scene(GameObject *object);
+   Scene(GameObject *object);
 
-    void generateListObject(QList<GameObject*> sceneObjects, QString path);
+    void generateListObject(QList<GameObject*> *sceneObjects, QString path);
     Scene(QString *name);
-
-
-
 };
 
 #endif // SCENE_H

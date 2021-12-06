@@ -9,9 +9,9 @@
 
     Scene::~Scene() { }
 
-    void generateListObject(QList<GameObject*> *sceneObjects) {
+    Scene::Scene(QString *name) {
 
-        QFile file;
+        this->name = name;
     }
 
     /*
@@ -25,27 +25,24 @@
      *
      * Mesh -> ID through ObjFile?
      */
-/*
 
- void Scene::generateListObject(QList *sceneObjects) {
-
-      QString path;
+ void Scene::generateListObject(QList<GameObject*> *sceneObjects, QString path) {
 
       path = "/scene";
+      QDir mypath(path);
 
-      QDir(path);
-      QDir myPath(path);
+      if(!mypath(path).exists()) {
+
+          return;
+      }
 
       sceneObjects = myPath.entryList();
       sceneObjects.append();
   }
 
- Scene::Scene(QString *name) {
 
-     this->name = name;
-     this->objectList = new QList<GameObject*>();
+ this->objectList = new QList<GameObject*>();
 
-     QList
+ QList
 
-     generateListObject(name)
- }*/
+ generateListObject(name)

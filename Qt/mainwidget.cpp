@@ -139,6 +139,11 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
             course =false;
         }
     }
+
+    if(e->key() == Qt::Key_Escape){
+        close();
+    }
+
     if(e->key() == Qt::Key_Z){
         if(!course)
             d = 0.1;
@@ -146,6 +151,7 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
             d = 0.3;
         }
         int val = rotateY % 360;
+
         switch(val){
         case 90 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
