@@ -26,18 +26,28 @@
      * Mesh -> ID through ObjFile?
      */
 
- void Scene::generateListObject(QList<GameObject*> *sceneObjects, QString path) {
+ void Scene::generateListObject(QList<GameObject*> *sceneObjects, QString filename) {
 
-      path = "/scene";
-      QDir mypath(path);
+     /*Structure du fichier :
+      * chargement de ce dont a besoin un GameObject :
+      * parent = monde our le GameObject précédent
+      * mesh = mesh à appliquer (float à implémenter)
+      * tranform = float
+      * collider = float
+      *
+      * charger le gameobject en dernier
+      *
+      * inclure la ligne séparatrice
+      *
+      * Passer à l'objet suivant
+      * */
 
-      /*if(!mypath(path).exists()) {
+      filename = "scene/scene.txt";
+      QFile file(filename);
 
-          return;
-      }
+      QString separator = "--------------------"
 
       //Files list
-      sceneObjects = myPath.entryList(QList() << "*.obj", QDir::Files);
-      sceneObjects->append();*/
+
   }
 
