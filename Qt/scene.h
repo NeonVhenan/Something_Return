@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QFile>
 #include <QString>
+#include <QIODevice>
 
 #include "gameobject.h"
 

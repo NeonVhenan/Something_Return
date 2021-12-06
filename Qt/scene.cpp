@@ -2,6 +2,7 @@
 #include <QFile>
 #include <QString>
 #include <QList>
+#include <QIODevice>
 
 #include "scene.h"
 
@@ -46,6 +47,18 @@
       QFile file(filename);
 
       QString separator = "--------------------"
+
+      if(!file.open(QIODevice::ReadOnly)) {
+            return;
+      }
+
+      QTextSream in(&file);
+      QString line = in.readLine();
+
+      while(!line.isNull() && line != separator) {
+
+          return;
+      }
 
       //Files list
 
