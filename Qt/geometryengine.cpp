@@ -73,46 +73,46 @@ GeometryEngine::GeometryEngine()
     monde->arrayBuf.create();
     monde->indexBuf.create();
 
-    couloirDroit = new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0)));
-    couloirDroit->arrayBuf.create();
-    couloirDroit->indexBuf.create();
+    listeObjets.push_back(new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0))));
+    listeObjets[0]->arrayBuf.create();
+    listeObjets[0]->indexBuf.create();
 
-    monde->addEnfant(couloirDroit);
+    monde->addEnfant(listeObjets[0]);
     //mise à jour collider monde
 
-    couloirGauche = new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 4.0, 0.0)));
-    couloirGauche->arrayBuf.create();
-    couloirGauche->indexBuf.create();
+    listeObjets.push_back(new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 6.0, 0.0))));
+    listeObjets[1]->arrayBuf.create();
+    listeObjets[1]->indexBuf.create();
 
-    monde->addEnfant(couloirGauche);
+    monde->addEnfant(listeObjets[1]);
     //mise à jour collider monde
 
-    couloirDroit2 = new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0)));//ColliderBox(QVector3D(-20.0, 0.0,-28.5), QVector3D(0.0, 4.0, -27.5)));
-    couloirDroit2->arrayBuf.create();
-    couloirDroit2->indexBuf.create();
+    listeObjets.push_back(new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0))));
+    listeObjets[2]->arrayBuf.create();
+    listeObjets[2]->indexBuf.create();
 
-    monde->addEnfant(couloirDroit2);
+    monde->addEnfant(listeObjets[2]);
     //mise à jour collider monde
 
-    couloirGauche2 = new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,-4.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 4.0, 0.0)));//ColliderBox(QVector3D(-20.0, 0.0,-20.5), QVector3D(-4.0, 4.0, -19.5)));
-    couloirGauche2->arrayBuf.create();
-    couloirGauche2->indexBuf.create();
+    listeObjets.push_back(new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,-4.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 6.0, 0.0))));
+    listeObjets[3]->arrayBuf.create();
+    listeObjets[3]->indexBuf.create();
 
-    monde->addEnfant(couloirGauche2);
+    monde->addEnfant(listeObjets[3]);
     //mise à jour collider monde
 
-    couloirDroit3 = new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,20.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0)));//ColliderBox(QVector3D(-20.0, 0.0,-28.5), QVector3D(0.0, 4.0, -27.5)));
-    couloirDroit3->arrayBuf.create();
-    couloirDroit3->indexBuf.create();
+    listeObjets.push_back(new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,20.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0))));
+    listeObjets[4]->arrayBuf.create();
+    listeObjets[4]->indexBuf.create();
 
-    monde->addEnfant(couloirDroit3);
+    monde->addEnfant(listeObjets[4]);
     //mise à jour collider monde
 
-    couloirGauche3 = new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,24.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 4.0, 0.0)));//ColliderBox(QVector3D(-20.0, 0.0,-20.5), QVector3D(-4.0, 4.0, -19.5)));
-    couloirGauche3->arrayBuf.create();
-    couloirGauche3->indexBuf.create();
+    listeObjets.push_back(new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,24.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 6.0, 0.0))));
+    listeObjets[5]->arrayBuf.create();
+    listeObjets[5]->indexBuf.create();
 
-    monde->addEnfant(couloirGauche3);
+    monde->addEnfant(listeObjets[5]);
     //mise à jour collider monde
 
 
@@ -136,45 +136,13 @@ void GeometryEngine::initCubeGeometry()
     monde->indexBuf.bind();
     monde->indexBuf.allocate(monde->mesh.indices,  monde->mesh.indexCount* sizeof(GLushort));
 
+    for(int i = 0; i < listeObjets.size(); i++){
+        listeObjets[i]->arrayBuf.bind();
+        listeObjets[i]->arrayBuf.allocate(listeObjets[i]->mesh.vertices, listeObjets[i]->mesh.vertexNumber * sizeof(VertexData));
 
-    couloirDroit->arrayBuf.bind();
-    couloirDroit->arrayBuf.allocate(couloirDroit->mesh.vertices, couloirDroit->mesh.vertexNumber * sizeof(VertexData));
-
-    couloirDroit->indexBuf.bind();
-    couloirDroit->indexBuf.allocate(couloirDroit->mesh.indices,  couloirDroit->mesh.indexCount* sizeof(GLushort));
-
-    couloirGauche->arrayBuf.bind();
-    couloirGauche->arrayBuf.allocate(couloirGauche->mesh.vertices, couloirGauche->mesh.vertexNumber * sizeof(VertexData));
-
-    couloirGauche->indexBuf.bind();
-    couloirGauche->indexBuf.allocate(couloirGauche->mesh.indices,  couloirGauche->mesh.indexCount* sizeof(GLushort));
-
-
-    couloirDroit2->arrayBuf.bind();
-    couloirDroit2->arrayBuf.allocate(couloirDroit2->mesh.vertices, couloirDroit2->mesh.vertexNumber * sizeof(VertexData));
-
-    couloirDroit2->indexBuf.bind();
-    couloirDroit2->indexBuf.allocate(couloirDroit2->mesh.indices,  couloirDroit2->mesh.indexCount* sizeof(GLushort));
-
-
-    couloirGauche2->arrayBuf.bind();
-    couloirGauche2->arrayBuf.allocate(couloirGauche2->mesh.vertices, couloirGauche2->mesh.vertexNumber * sizeof(VertexData));
-
-    couloirGauche2->indexBuf.bind();
-    couloirGauche2->indexBuf.allocate(couloirGauche2->mesh.indices,  couloirGauche2->mesh.indexCount* sizeof(GLushort));
-
-    couloirDroit3->arrayBuf.bind();
-    couloirDroit3->arrayBuf.allocate(couloirDroit3->mesh.vertices, couloirDroit3->mesh.vertexNumber * sizeof(VertexData));
-
-    couloirDroit3->indexBuf.bind();
-    couloirDroit3->indexBuf.allocate(couloirDroit3->mesh.indices,  couloirDroit3->mesh.indexCount* sizeof(GLushort));
-
-
-    couloirGauche3->arrayBuf.bind();
-    couloirGauche3->arrayBuf.allocate(couloirGauche3->mesh.vertices, couloirGauche3->mesh.vertexNumber * sizeof(VertexData));
-
-    couloirGauche3->indexBuf.bind();
-    couloirGauche3->indexBuf.allocate(couloirGauche3->mesh.indices,  couloirGauche3->mesh.indexCount* sizeof(GLushort));
+        listeObjets[i]->indexBuf.bind();
+        listeObjets[i]->indexBuf.allocate(listeObjets[i]->mesh.indices,  listeObjets[i]->mesh.indexCount* sizeof(GLushort));
+    }
 
 //! [1]
 }
@@ -227,11 +195,17 @@ void GeometryEngine::drawGameObject(QOpenGLShaderProgram *program, quintptr offs
 
 bool GeometryEngine::testCollision(GameObject * obj){
     ColliderBox *c = new ColliderBox(obj->collide.point1, obj->collide.point2);
-    c->transform(obj->transform);
-    if(c->collision(new ColliderBox(QVector3D(-0.75,0.0,-0.75), QVector3D(0.75, 3.5, 0.75)))){//test collision sans oublié le transform bloc/bloc
-        printf("collision avec le monde\n");
+    if(obj->parent == NULL)
+        c->transform(obj->transform, 0);
+    else {
+        printf("hello\n");
+        c->transform(obj->transform, 1);
+    }
+    if(c->collision(new ColliderBox(QVector3D(-1.5,0.0,-1.5), QVector3D(2.5, 3.5, 1.5))) || ColliderBox(QVector3D(-1.5,0.0,-1.5), QVector3D(2.5, 3.5, 1.5)).collision(c)){//test collision sans oublié le transform bloc/bloc
         if(!obj->child->isEmpty()){
-            for(int i =0 ; i < obj->child->size(); i++){
+            for(int i = 0 ; i < obj->child->size(); i++){
+                if(obj->child->at(i)->parent == NULL)
+                    printf("problème ?\n");
                 if(testCollision(obj->child->at(i)))
                     return true;
             }

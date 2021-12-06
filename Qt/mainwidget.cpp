@@ -151,7 +151,6 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
             d = 0.3;
         }
         int val = rotateY % 360;
-
         switch(val){
         case 90 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(-1.0f*d, 0.0f, 0.0f));
@@ -160,10 +159,11 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
             }
             break;
         case 180 :
-            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
+            GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0*d));
             if(GeometryEngine::testCollision(GeometryEngine::monde)){
                 GeometryEngine::monde->transform.addTranslation(QVector3D(0.0, 0.0f, d));
             }
+            printf("%f\n",-1.0*d);
             break;
         case 270 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
@@ -176,6 +176,7 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
             if(GeometryEngine::testCollision(GeometryEngine::monde)){
                 GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
             }
+            printf("%f %f %f         %f %f %f\n",GeometryEngine::monde->collide.point1.x(), GeometryEngine::monde->collide.point1.y(), GeometryEngine::monde->collide.point1.z(), GeometryEngine::monde->collide.point2.x(), GeometryEngine::monde->collide.point2.y(), GeometryEngine::monde->collide.point2.z());
             break;
         }
     }
@@ -290,6 +291,9 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
             break;
         }
     }
+    if(e->key() == Qt::Key_C){
+        printf("%f %f %f         %f %f %f\n",GeometryEngine::monde->collide.point1.x(), GeometryEngine::monde->collide.point1.y(), GeometryEngine::monde->collide.point1.z(), GeometryEngine::monde->collide.point2.x(), GeometryEngine::monde->collide.point2.y(), GeometryEngine::monde->collide.point2.z());
+    }
 
     update();
 }
@@ -348,7 +352,7 @@ void MainWidget::initShaders()
 void MainWidget::initTextures()
 {
     // Load cube.png image
-    texture = new QOpenGLTexture(QImage(":/Heightmap_Mountain.png").mirrored());
+    texture = new QOpenGLTexture(QImage(":/rock.png").mirrored());
 
     // Set nearest filtering mode for texture minification
     texture->setMinificationFilter(QOpenGLTexture::Nearest);

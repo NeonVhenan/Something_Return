@@ -23,7 +23,7 @@ void GameObject::transformObj(QMatrix4x4 *mat){
 
 void GameObject::addEnfant(GameObject * obj){
     ColliderBox *c = new ColliderBox(obj->collide.point1, obj->collide.point2);
-    c->transform(obj->transform);
+    c->transform(obj->transform, 1);
     if(!collide.defini){
         collide = obj->collide;
         this->collide.defini = true;
@@ -33,7 +33,6 @@ void GameObject::addEnfant(GameObject * obj){
             this->collide.point1[0] = c->xmin();
         }
         if(this->collide.xmax() < c->xmax()){
-            printf("%f %f\n", this->collide.xmax(), c->xmax());
             this->collide.point2[0] = c->xmax();
         }
         if(this->collide.ymin() > c->ymin()){

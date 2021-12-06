@@ -74,13 +74,7 @@ private:
     void initCubeGeometry();
 
 
-    GameObject* couloirDroit;
-    GameObject* couloirGauche;
-    GameObject* couloirDroit2;
-    GameObject* couloirGauche2;
-    GameObject* couloirDroit3;
-    GameObject* couloirGauche3;
-
+    QList<GameObject*> listeObjets;
 
 
 

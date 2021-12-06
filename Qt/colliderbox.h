@@ -8,7 +8,7 @@ class ColliderBox
 public:
     ColliderBox();
     ColliderBox(QVector3D point1, QVector3D point2);
-    void transform(Transform t);
+    void transform(Transform t, int i);
     bool collision(ColliderBox * c);
 
     float xmin();

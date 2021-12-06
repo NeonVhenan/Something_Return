@@ -31,14 +31,13 @@
       path = "/scene";
       QDir mypath(path);
 
-      if(!mypath(path).exists()) {
+      /*if(!mypath(path).exists()) {
 
           return;
       }
 
       //Files list
       sceneObjects = myPath.entryList(QList() << "*.obj", QDir::Files);
-      sceneObjects.append();
+      sceneObjects->append();*/
   }
 
- generateListObject(name)
