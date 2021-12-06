@@ -384,12 +384,6 @@ qrc_textures.cpp: textures.qrc \
 		/usr/lib/qt5/bin/rcc \
 		ground.png \
 		wall.png \
-		snowrocks.png \
-		grass.png \
-		rock.png \
-		TestMurs2.png \
-		Heightmap_Mountain.png \
-		TestMurs1.png
 	/usr/lib/qt5/bin/rcc -name textures textures.qrc -o qrc_textures.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
