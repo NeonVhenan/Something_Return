@@ -36,13 +36,9 @@
           return;
       }
 
-      sceneObjects = myPath.entryList();
+      //Files list
+      sceneObjects = myPath.entryList(QList() << "*.obj", QDir::Files);
       sceneObjects.append();
   }
-
-
- this->objectList = new QList<GameObject*>();
-
- QList
 
  generateListObject(name)
