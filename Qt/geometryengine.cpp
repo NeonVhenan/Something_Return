@@ -116,6 +116,31 @@ GeometryEngine::GeometryEngine()
     //mise à jour collider monde
 
 
+    listeObjets.push_back(new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00), QVector3D(0.0f,0.0f,0.0f), 1.0f),
+                                         ColliderBox(QVector3D(0, -1.0,0), QVector3D(0, -1.0, 0.0))));
+    listeObjets[6]->arrayBuf.create();
+    listeObjets[6]->indexBuf.create();
+
+    monde->addEnfant(listeObjets[6]);
+
+
+    listeObjets.push_back(new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90),
+                                                QVector3D(24.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(0, -1.0,0), QVector3D(0, -1.0, 0.0))));
+    listeObjets[7]->arrayBuf.create();
+    listeObjets[7]->indexBuf.create();
+
+    monde->addEnfant(listeObjets[7]);
+
+
+
+    listeObjets.push_back(new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90),
+                                               QVector3D(24.0f,0.0f,20.0f), 1.0f), ColliderBox(QVector3D(0, -1.0,0), QVector3D(0, -1.0, 0.0))));
+    listeObjets[8]->arrayBuf.create();
+    listeObjets[8]->indexBuf.create();
+
+    monde->addEnfant(listeObjets[8]);
+
+
 
     initCubeGeometry();
 
@@ -188,6 +213,10 @@ void GeometryEngine::drawGameObject(QOpenGLShaderProgram *program, quintptr offs
     }
     if(!obj->child->isEmpty()){
         for(int i = 0; i < obj->child->size(); i++){
+
+            program->setUniformValue("TextN",obj->child->value(i)->mesh.TextN  );
+
+
             drawGameObject(program, offset, mat, vertexLocation, texcoordLocation, obj->child->value(i));
         }
     }

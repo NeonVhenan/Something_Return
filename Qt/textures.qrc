@@ -6,5 +6,7 @@
         <file>snowrocks.png</file>
         <file>TestMurs1.png</file>
         <file>TestMurs2.png</file>
+        <file>wall.png</file>
+        <file>ground.png</file>
     </qresource>
 </RCC>

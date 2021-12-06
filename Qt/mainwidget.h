@@ -92,10 +92,9 @@ private:
     QOpenGLShaderProgram program;
     GeometryEngine *geometries;
 
-    QOpenGLTexture *texture;
-    QOpenGLTexture *texture1;
-    QOpenGLTexture *texture2;
-    QOpenGLTexture *texture3;
+    QOpenGLTexture *murs;
+    QOpenGLTexture *sol;
+
 
     QMatrix4x4 projection;
 

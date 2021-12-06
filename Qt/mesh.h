@@ -25,6 +25,7 @@ public:
     VertexData *vertices;
     unsigned int indexCount;
     GLushort *indices;
+    int TextN;
 };
 
 #endif // MESH_H

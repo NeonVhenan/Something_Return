@@ -57,10 +57,9 @@
 MainWidget::MainWidget(QWidget *parent) :
     QOpenGLWidget(parent),
     geometries(0),
-    texture(0),
-    texture1(0),
-    texture2(0),
-    texture3(0),
+    murs(0),
+    sol(0),
+
     angularSpeed(0)
 {
 }
@@ -70,10 +69,8 @@ MainWidget::~MainWidget()
     // Make sure the context is current when deleting the texture
     // and the buffers.
     makeCurrent();
-    delete texture;
-    delete texture1;
-    delete texture2;
-    delete texture3;
+    delete murs;
+    delete sol;
     delete geometries;
     doneCurrent();
 }
@@ -316,8 +313,9 @@ void MainWidget::initializeGL()
     glDisable(GL_CULL_FACE);
 
 //! [2]
+    //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 
     geometries = new GeometryEngine;
@@ -352,16 +350,30 @@ void MainWidget::initShaders()
 void MainWidget::initTextures()
 {
     // Load cube.png image
-    texture = new QOpenGLTexture(QImage(":/rock.png").mirrored());
+    murs = new QOpenGLTexture(QImage(":/wall.png").mirrored());
 
     // Set nearest filtering mode for texture minification
-    texture->setMinificationFilter(QOpenGLTexture::Nearest);
+    murs->setMinificationFilter(QOpenGLTexture::Nearest);
 
     // Set bilinear filtering mode for texture magnification
-    texture->setMagnificationFilter(QOpenGLTexture::Linear);
+    murs->setMagnificationFilter(QOpenGLTexture::Linear);
     // Wrap texture coordinates by repeating
     // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
-    texture->setWrapMode(QOpenGLTexture::Repeat);
+    murs->setWrapMode(QOpenGLTexture::Repeat);
+
+
+    // Load cube.png image
+    sol = new QOpenGLTexture(QImage(":/ground.png").mirrored());
+
+    // Set nearest filtering mode for texture minification
+    sol->setMinificationFilter(QOpenGLTexture::Nearest);
+
+    // Set bilinear filtering mode for texture magnification
+    sol->setMagnificationFilter(QOpenGLTexture::Linear);
+    // Wrap texture coordinates by repeating
+    // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
+    sol->setWrapMode(QOpenGLTexture::Repeat);
+
 }
 //! [4]
 
@@ -387,10 +399,8 @@ void MainWidget::paintGL()
     // Clear color and depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    texture->bind(0);
-    /*texture1->bind(1);
-    texture2->bind(2);
-    texture3->bind(3);*/
+    murs->bind(0);
+    sol->bind(1);
 
 //! [6]
     QMatrix4x4 matrix;
@@ -404,10 +414,8 @@ void MainWidget::paintGL()
 
 
     // Use texture unit 0 which contains cube.png
-    program.setUniformValue("texture", 0);
-    /*program.setUniformValue("texture1", 1);
-    program.setUniformValue("texture2", 2);
-    program.setUniformValue("texture3", 3);*/
+    program.setUniformValue("murs", 0);
+    program.setUniformValue("sol", 1);
 
     // Draw cube geometry
     geometries->draw(&program);

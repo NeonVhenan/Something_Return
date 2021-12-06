@@ -10,7 +10,7 @@ in vec2 a_texcoord;
 out vec2 v_texcoord;
 out vec3 v_position;
 
-//uniform sampler2D texture;
+uniform sampler2D texture;
 
 //! [0]
 void main()
