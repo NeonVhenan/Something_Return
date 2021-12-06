@@ -57,7 +57,10 @@
 
       while(!line.isNull() && line != separator) {
 
-          return;
+          process_line(line);
+          line = in.readLine();
+
+          //return;
       }
 
       //Files list
