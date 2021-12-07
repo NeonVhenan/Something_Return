@@ -73,72 +73,73 @@ GeometryEngine::GeometryEngine()
     monde->arrayBuf.create();
     monde->indexBuf.create();
 
+    unsigned int i = 0;
     listeObjets.push_back(new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0))));
-    listeObjets[0]->arrayBuf.create();
-    listeObjets[0]->indexBuf.create();
+    listeObjets[i]->arrayBuf.create();
+    listeObjets[i]->indexBuf.create();
 
-    monde->addEnfant(listeObjets[0]);
+    monde->addEnfant(listeObjets[i++]);
     //mise à jour collider monde
 
     listeObjets.push_back(new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 6.0, 0.0))));
-    listeObjets[1]->arrayBuf.create();
-    listeObjets[1]->indexBuf.create();
+    listeObjets[i]->arrayBuf.create();
+    listeObjets[i]->indexBuf.create();
 
-    monde->addEnfant(listeObjets[1]);
+    monde->addEnfant(listeObjets[i++]);
     //mise à jour collider monde
 
-    listeObjets.push_back(new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0))));
-    listeObjets[2]->arrayBuf.create();
-    listeObjets[2]->indexBuf.create();
+//    listeObjets.push_back(new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0))));
+//    listeObjets[i]->arrayBuf.create();
+//    listeObjets[i]->indexBuf.create();
 
-    monde->addEnfant(listeObjets[2]);
-    //mise à jour collider monde
+//    monde->addEnfant(listeObjets[i++]);
+//    //mise à jour collider monde
 
-    listeObjets.push_back(new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,-4.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 6.0, 0.0))));
-    listeObjets[3]->arrayBuf.create();
-    listeObjets[3]->indexBuf.create();
+//    listeObjets.push_back(new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,-4.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 6.0, 0.0))));
+//    listeObjets[i]->arrayBuf.create();
+//    listeObjets[i]->indexBuf.create();
 
-    monde->addEnfant(listeObjets[3]);
-    //mise à jour collider monde
+//    monde->addEnfant(listeObjets[i++]);
+//    //mise à jour collider monde
 
-    listeObjets.push_back(new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,20.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0))));
-    listeObjets[4]->arrayBuf.create();
-    listeObjets[4]->indexBuf.create();
+//    listeObjets.push_back(new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,20.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0))));
+//    listeObjets[i]->arrayBuf.create();
+//    listeObjets[i]->indexBuf.create();
 
-    monde->addEnfant(listeObjets[4]);
-    //mise à jour collider monde
+//    monde->addEnfant(listeObjets[i++]);
+//    //mise à jour collider monde
 
-    listeObjets.push_back(new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,24.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 6.0, 0.0))));
-    listeObjets[5]->arrayBuf.create();
-    listeObjets[5]->indexBuf.create();
+//    listeObjets.push_back(new GameObject(monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,24.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 6.0, 0.0))));
+//    listeObjets[i]->arrayBuf.create();
+//    listeObjets[i]->indexBuf.create();
 
-    monde->addEnfant(listeObjets[5]);
+//    monde->addEnfant(listeObjets[i++]);
     //mise à jour collider monde
 
 
     listeObjets.push_back(new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00), QVector3D(0.0f,0.0f,0.0f), 1.0f),
                                          ColliderBox(QVector3D(0, -1.0,0), QVector3D(0, -1.0, 0.0))));
-    listeObjets[6]->arrayBuf.create();
-    listeObjets[6]->indexBuf.create();
+    listeObjets[i]->arrayBuf.create();
+    listeObjets[i]->indexBuf.create();
 
-    monde->addEnfant(listeObjets[6]);
-
-
-    listeObjets.push_back(new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90),
-                                                QVector3D(24.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(0, -1.0,0), QVector3D(0, -1.0, 0.0))));
-    listeObjets[7]->arrayBuf.create();
-    listeObjets[7]->indexBuf.create();
-
-    monde->addEnfant(listeObjets[7]);
+    monde->addEnfant(listeObjets[i++]);
 
 
+//    listeObjets.push_back(new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90),
+//                                                QVector3D(24.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(0, -1.0,0), QVector3D(0, -1.0, 0.0))));
+//    listeObjets[i]->arrayBuf.create();
+//    listeObjets[i]->indexBuf.create();
 
-    listeObjets.push_back(new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90),
-                                               QVector3D(24.0f,0.0f,20.0f), 1.0f), ColliderBox(QVector3D(0, -1.0,0), QVector3D(0, -1.0, 0.0))));
-    listeObjets[8]->arrayBuf.create();
-    listeObjets[8]->indexBuf.create();
+//    monde->addEnfant(listeObjets[i++]);
 
-    monde->addEnfant(listeObjets[8]);
+
+
+//    listeObjets.push_back(new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90),
+//                                               QVector3D(24.0f,0.0f,20.0f), 1.0f), ColliderBox(QVector3D(0, -1.0,0), QVector3D(0, -1.0, 0.0))));
+//    listeObjets[i]->arrayBuf.create();
+//    listeObjets[i]->indexBuf.create();
+
+//    monde->addEnfant(listeObjets[i++]);
 
 
 

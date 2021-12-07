@@ -2,7 +2,6 @@
 #include <QFile>
 #include <QString>
 #include <QList>
-#include <QIODevice>
 
 #include "scene.h"
 
@@ -10,10 +9,10 @@
 
     Scene::~Scene() { }
 
-    /*Scene::Scene(QString *name) {
+    Scene::Scene(QString *name) {
 
-        this->name = name;
-    }*/
+        //this->name = name;
+    }
 
     /*
      * Créer une arborescence suivant ce modèle :
@@ -47,19 +46,6 @@
       QFile file(filename);
 
       QString separator = "--------------------";
-      QString line;
-
-      if(!file.open(QIODevice::ReadOnly)) {
-            return;
-      }
-
-      QTextStream in(&file);
-
-      while(!line.isNull() && line != separator && !file.atEnd()) {
-
-          line = in.readLine();
-          //return;
-      }
 
       //Files list
 

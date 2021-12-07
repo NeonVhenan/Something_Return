@@ -16,6 +16,10 @@ void main()
         gl_FragColor = texture2D(murs, v_texcoord);
  else
      gl_FragColor = texture2D(sol, v_texcoord);
+
+ //float originalZ = gl_FragCoord.z / gl_FragCoord.w;
+ //originalZ=originalZ - floor(originalZ);
+// gl_FragColor = vec4(originalZ, originalZ, originalZ,1.);
 }
 //! [0]
 
