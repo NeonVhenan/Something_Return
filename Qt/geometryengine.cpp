@@ -228,14 +228,14 @@ bool GeometryEngine::testCollision(GameObject * obj){
     if(obj->parent == NULL)
         c->transform(obj->transform, 0);
     else {
-        printf("hello\n");
+        //printf("hello\n");
         c->transform(obj->transform, 1);
     }
     if(c->collision(new ColliderBox(QVector3D(-1.5,0.0,-1.5), QVector3D(2.5, 3.5, 1.5))) || ColliderBox(QVector3D(-1.5,0.0,-1.5), QVector3D(2.5, 3.5, 1.5)).collision(c)){//test collision sans oublié le transform bloc/bloc
         if(!obj->child->isEmpty()){
             for(int i = 0 ; i < obj->child->size(); i++){
                 if(obj->child->at(i)->parent == NULL)
-                    printf("problème ?\n");
+                    //printf("problème ?\n");
                 if(testCollision(obj->child->at(i)))
                     return true;
             }

@@ -2,6 +2,7 @@
 #include <QFile>
 #include <QString>
 #include <QList>
+#include <QIODevice>
 
 #include "scene.h"
 
@@ -11,7 +12,7 @@
 
     Scene::Scene(QString *name) {
 
-        //this->name = name;
+        this->name = name;
     }
 
     /*
@@ -30,7 +31,7 @@
 
      /*Structure du fichier :
       * chargement de ce dont a besoin un GameObject :
-      * parent = monde our le GameObject précédent
+      * parent = monde ou le GameObject précédent
       * mesh = mesh à appliquer (float à implémenter)
       * tranform = float
       * collider = float
@@ -48,6 +49,21 @@
       QString separator = "--------------------";
 
       //Files list
+      if(!file.open(QIODevice::ReadOnly)) {
+
+          return;
+      }
+
+      printf("blbl \n");
+
+      while(!file.atEnd()) {
+
+          printf("work \n");
+
+          QByteArray line = file.readLine();
+          printf("%s \n", line);
+      }
+
+      file.close();
 
   }
-

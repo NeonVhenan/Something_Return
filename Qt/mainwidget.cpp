@@ -160,7 +160,7 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
             if(GeometryEngine::testCollision(GeometryEngine::monde)){
                 GeometryEngine::monde->transform.addTranslation(QVector3D(0.0, 0.0f, d));
             }
-            printf("%f\n",-1.0*d);
+            //printf("%f\n",-1.0*d);
             break;
         case 270 :
             GeometryEngine::monde->transform.addTranslation(QVector3D(d, 0.0f, 0.0f));
@@ -173,7 +173,7 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
             if(GeometryEngine::testCollision(GeometryEngine::monde)){
                 GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
             }
-            printf("%f %f %f         %f %f %f\n",GeometryEngine::monde->collide.point1.x(), GeometryEngine::monde->collide.point1.y(), GeometryEngine::monde->collide.point1.z(), GeometryEngine::monde->collide.point2.x(), GeometryEngine::monde->collide.point2.y(), GeometryEngine::monde->collide.point2.z());
+            //printf("%f %f %f         %f %f %f\n",GeometryEngine::monde->collide.point1.x(), GeometryEngine::monde->collide.point1.y(), GeometryEngine::monde->collide.point1.z(), GeometryEngine::monde->collide.point2.x(), GeometryEngine::monde->collide.point2.y(), GeometryEngine::monde->collide.point2.z());
             break;
         }
     }

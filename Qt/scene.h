@@ -11,7 +11,7 @@ class Scene
 {
 private:
     QString filename;
-    QString path;
+    QString *name;
     //QList<GameObject*> *objectList;
 
 public:

@@ -16,7 +16,7 @@ ColliderBox::ColliderBox(QVector3D point1, QVector3D point2)
 
 void ColliderBox::transform(Transform t, int i)
 {
-    printf("AVANT : %f %f %f         %f %f %f\n",point1.x(), point1.y(), point1.z(), point2.x(),point2.y(), point2.z());
+    //printf("AVANT : %f %f %f         %f %f %f\n",point1.x(), point1.y(), point1.z(), point2.x(),point2.y(), point2.z());
     QMatrix4x4 mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
     if(i != 0)
         GeometryEngine::monde->transform.transform(&mat);
@@ -44,7 +44,7 @@ void ColliderBox::transform(Transform t, int i)
     }
     this->point1 = QVector3D(p1.x(), p1.y(), p1.z());
     this->point2 = QVector3D(p2.x(), p2.y(), p2.z());
-    printf("APRES : %f %f %f         %f %f %f\n",point1.x(), point1.y(), point1.z(), point2.x(),point2.y(), point2.z());
+    //printf("APRES : %f %f %f         %f %f %f\n",point1.x(), point1.y(), point1.z(), point2.x(),point2.y(), point2.z());
 }
 
 bool ColliderBox::collision(ColliderBox * c)
