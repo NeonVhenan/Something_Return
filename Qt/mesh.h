@@ -20,6 +20,7 @@ public:
     Mesh();
     Mesh(int type);
     ~Mesh();
+    void transform(QMatrix4x4 mat);
 
     unsigned int vertexNumber;
     VertexData *vertices;

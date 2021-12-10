@@ -3,6 +3,7 @@
 #include <QString>
 #include <QList>
 #include <QIODevice>
+#include <stdio.h>
 
 #include "scene.h"
 
@@ -10,7 +11,7 @@
 
     Scene::~Scene() { }
 
-    Scene::Scene(QString *name) {
+    Scene::Scene(QString name) {
 
         this->name = name;
     }
@@ -27,7 +28,7 @@
      * Mesh -> ID through ObjFile?
      */
 
- void Scene::generateListObject(QList<GameObject*> *sceneObjects, QString filename) {
+ void Scene::generateListObject() {
 
      /*Structure du fichier :
       * chargement de ce dont a besoin un GameObject :
@@ -43,14 +44,15 @@
       * Passer à l'objet suivant
       * */
 
-      filename = "scene/scene.txt";
-      QFile file(filename);
+     printf("hello\n");
+
+      QFile file(name);
 
       QString separator = "--------------------";
 
       //Files list
-      if(!file.open(QIODevice::ReadOnly)) {
-
+      if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+          printf("non\n");
           return;
       }
 
@@ -61,7 +63,7 @@
           printf("work \n");
 
           QByteArray line = file.readLine();
-          printf("%s \n", line);
+          printf("% \n", line);
       }
 
       file.close();

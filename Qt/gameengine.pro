@@ -4,7 +4,9 @@ TARGET = gameengine
 TEMPLATE = app
 
 SOURCES += main.cpp \
+    collider.cpp \
     colliderbox.cpp \
+    collidermesh.cpp \
     gameobject.cpp \
     mesh.cpp \
     transform.cpp \
@@ -15,7 +17,9 @@ SOURCES += \
     geometryengine.cpp
 
 HEADERS += \
+    collider.h \
     colliderbox.h \
+    collidermesh.h \
     gameobject.h \
     mainwidget.h \
     geometryengine.h \
@@ -30,3 +34,6 @@ RESOURCES += \
 # install
 target.path = $$[YOUR_PATH]
 INSTALLS += target
+
+DISTFILES += \
+    scene/scene.txt

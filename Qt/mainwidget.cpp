@@ -353,10 +353,10 @@ void MainWidget::initTextures()
     murs = new QOpenGLTexture(QImage(":/wall.png").mirrored());
 
     // Set nearest filtering mode for texture minification
-    murs->setMinificationFilter(QOpenGLTexture::NearestMipMapNearest);
+    murs->setMinificationFilter(QOpenGLTexture::Nearest);
 
     // Set bilinear filtering mode for texture magnification
-    murs->setMagnificationFilter(QOpenGLTexture::LinearMipMapNearest);
+    murs->setMagnificationFilter(QOpenGLTexture::Linear);
     // Wrap texture coordinates by repeating
     // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
     murs->setWrapMode(QOpenGLTexture::Repeat);
@@ -366,10 +366,10 @@ void MainWidget::initTextures()
     sol = new QOpenGLTexture(QImage(":/ground.png").mirrored());
 
     // Set nearest filtering mode for texture minification
-    sol->setMinificationFilter(QOpenGLTexture::NearestMipMapNearest);
+    sol->setMinificationFilter(QOpenGLTexture::Nearest);
 
     // Set bilinear filtering mode for texture magnification
-    sol->setMagnificationFilter(QOpenGLTexture::LinearMipMapNearest);
+    sol->setMagnificationFilter(QOpenGLTexture::Linear);
     // Wrap texture coordinates by repeating
     // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
     sol->setWrapMode(QOpenGLTexture::Repeat);
