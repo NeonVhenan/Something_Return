@@ -56,6 +56,7 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
 
+#include "BasicIO.h"
 
 class GeometryEngine : protected QOpenGLFunctions_3_1
 {
@@ -69,6 +70,7 @@ public:
 
     static bool testCollision(GameObject * obj);
 
+    Mesh loadOff(std::string filename);
 
 private:
     void initCubeGeometry();

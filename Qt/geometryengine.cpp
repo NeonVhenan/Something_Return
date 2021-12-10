@@ -142,6 +142,15 @@ GeometryEngine::GeometryEngine()
     //Scene *scene = new Scene(QString("../Something_Return/Qt/scene/scene.txt"));
     //scene->generateListObject();
 
+
+/* sphere.off
+    listeObjets.push_back(new GameObject(monde, loadOff("./sphere.off"), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00),
+                                                                                   QVector3D(0.0f,1.0f,5.0f), 1.0f), false));
+    listeObjets[i]->arrayBuf.create();
+   listeObjets[i]->indexBuf.create();
+
+   monde->addEnfant(listeObjets[i++]);
+*/
     initCubeGeometry();
 
 }
@@ -171,6 +180,35 @@ void GeometryEngine::initCubeGeometry()
 
 //! [1]
 }
+
+Mesh  GeometryEngine::loadOff(std::string filename){
+    Mesh mesh=Mesh();
+    std::vector< std::vector<unsigned int> >  faces;
+    std::vector<QVector3D>  vertex;
+    OFFIO::open(filename, vertex, faces, true);
+
+    mesh.vertexNumber = vertex.size();
+//    mesh.vertices[mesh.vertexNumber];
+    mesh.indexCount = faces.size()*3;
+     mesh.vertices = new VertexData[mesh.vertexNumber];
+     mesh.indices = new GLushort[mesh.indexCount];
+
+ //   mesh.indices[mesh.indexCount];
+
+    for(int i=0; i<mesh.indexCount;i+=3) {
+        mesh.indices[i]= faces[i/3][0];
+        mesh.indices[i+1]= faces[i/3][1];
+        mesh.indices[i+2]= faces[i/3][2];
+    }
+
+    for(int i=0; i<mesh.vertexNumber;i++) {
+        mesh.vertices[i]= {vertex[i], QVector2D(vertex[i][0]+vertex[i][1], vertex[i][0]+vertex[i][2])};
+    }
+mesh.TextN=1;
+    return mesh;
+
+}
+
 
 void GeometryEngine::draw(QOpenGLShaderProgram *program)
 {
