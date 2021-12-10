@@ -85,31 +85,31 @@ bool ColliderBox::collision(ColliderBox * c)
         if(c->ymin() >= ymin() && c->ymin() <= ymax()){
             if(c->zmin() >= zmin() && c->zmin() <= zmax())
                 return true;
-            if(c->zmin() < zmin() && c->zmax() > zmin())
+            if(c->zmin() <= zmin() && c->zmax() >= zmin())
                 return true;
         }
         else{
-            if(c->ymin() < ymin() && c->ymax() > ymin()){
+            if(c->ymin() <= ymin() && c->ymax() >= ymin()){
                 if(c->zmin() >= zmin() && c->zmin() <= zmax())
                     return true;
-                if(c->zmin() < zmin() && c->zmax() > zmin())
+                if(c->zmin() <= zmin() && c->zmax() >= zmin())
                     return true;
             }
         }
     }
     else{
-       if(c->xmin() < xmin() && c->xmax() > xmax()){
+       if(c->xmin() <= xmin() && c->xmax() >= xmin()){
            if(c->ymin() >= ymin() && c->ymin() <= ymax()){
                if(c->zmin() >= zmin() && c->zmin() <= zmax())
                    return true;
-               if(c->zmin() < zmin() && c->zmax() > zmin())
+               if(c->zmin() <= zmin() && c->zmax() >= zmin())
                    return true;
            }
            else{
-               if(c->ymin() < ymin() && c->ymax() > ymin()){
+               if(c->ymin() <= ymin() && c->ymax() >= ymin()){
                    if(c->zmin() >= zmin() && c->zmin() <= zmax())
                        return true;
-                   if(c->zmin() < zmin() && c->zmax() > zmin())
+                   if(c->zmin() <= zmin() && c->zmax() >= zmin())
                        return true;
                }
            }

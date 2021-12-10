@@ -28,7 +28,6 @@ HEADERS += \
     scene.h
 
 RESOURCES += \
-    maillages.qrc \
     shaders.qrc \
     textures.qrc
 
@@ -37,4 +36,5 @@ target.path = $$[YOUR_PATH]
 INSTALLS += target
 
 DISTFILES += \
-    scene/scene.txt
+    scene/scene.txt \
+    sphere.off

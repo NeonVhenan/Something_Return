@@ -143,14 +143,14 @@ GeometryEngine::GeometryEngine()
     //scene->generateListObject();
 
 
-/* sphere.off
-    listeObjets.push_back(new GameObject(monde, loadOff("./sphere.off"), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00),
+// sphere.off
+    listeObjets.push_back(new GameObject(monde, loadOff("../Something_Return/Qt/sphere.off"), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00),
                                                                                    QVector3D(0.0f,1.0f,5.0f), 1.0f), false));
     listeObjets[i]->arrayBuf.create();
    listeObjets[i]->indexBuf.create();
 
    monde->addEnfant(listeObjets[i++]);
-*/
+
     initCubeGeometry();
 
 }
@@ -267,7 +267,7 @@ bool GeometryEngine::testCollision(GameObject * obj){
     else {
         c->transform(obj->transform, 1);
     }
-    if(c->collision(new ColliderBox(QVector3D(-1.5,0.5,-1.5), QVector3D(1.5, 3.5, 1.5))) || ColliderBox(QVector3D(-1.5,0.0,-1.5), QVector3D(1.5, 3.5, 1.5)).collision(c)){//test collision sans oublié le transform bloc/bloc
+    if(c->collision(new ColliderBox(QVector3D(-1.5,0.0,-1.5), QVector3D(1.5, 3.5, 1.5)))){//test collision sans oublié le transform bloc/bloc
         if(!obj->child->isEmpty()){
             for(int i = 0 ; i < obj->child->size(); i++){
                 if(testCollision(obj->child->at(i))){
