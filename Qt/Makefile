@@ -62,6 +62,7 @@ SOURCES       = main.cpp \
 		scene.cpp \
 		mainwidget.cpp \
 		geometryengine.cpp qrc_maillages.cpp \
+		qrc_objects.cpp \
 		qrc_shaders.cpp \
 		qrc_textures.cpp \
 		moc_mainwidget.cpp
@@ -76,6 +77,7 @@ OBJECTS       = main.o \
 		mainwidget.o \
 		geometryengine.o \
 		qrc_maillages.o \
+		qrc_objects.o \
 		qrc_shaders.o \
 		qrc_textures.o \
 		moc_mainwidget.o
@@ -261,6 +263,7 @@ Makefile: gameengine.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.c
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		gameengine.pro \
 		maillages.qrc \
+		objects.qrc \
 		shaders.qrc \
 		textures.qrc
 	$(QMAKE) -o Makefile gameengine.pro
@@ -341,6 +344,7 @@ Makefile: gameengine.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.c
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 gameengine.pro:
 maillages.qrc:
+objects.qrc:
 shaders.qrc:
 textures.qrc:
 qmake: FORCE
@@ -357,7 +361,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents maillages.qrc shaders.qrc textures.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents maillages.qrc objects.qrc shaders.qrc textures.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents collider.h colliderbox.h collidermesh.h gameobject.h mainwidget.h geometryengine.h mesh.h transform.h scene.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp collider.cpp colliderbox.cpp collidermesh.cpp gameobject.cpp mesh.cpp transform.cpp scene.cpp mainwidget.cpp geometryengine.cpp $(DISTDIR)/
@@ -384,13 +388,21 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_maillages.cpp qrc_shaders.cpp qrc_textures.cpp
+compiler_rcc_make_all: qrc_maillages.cpp qrc_objects.cpp qrc_shaders.cpp qrc_textures.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_maillages.cpp qrc_shaders.cpp qrc_textures.cpp
+	-$(DEL_FILE) qrc_maillages.cpp qrc_objects.cpp qrc_shaders.cpp qrc_textures.cpp
 qrc_maillages.cpp: maillages.qrc \
 		/usr/lib/qt5/bin/rcc \
-		sphere.off
+		sphere.off \
+		corridor.obj \
+		corridor_s.obj
 	/usr/lib/qt5/bin/rcc -name maillages maillages.qrc -o qrc_maillages.cpp
+
+qrc_objects.cpp: objects.qrc \
+		/usr/lib/qt5/bin/rcc \
+		corridor.obj \
+		corridor_s.obj
+	/usr/lib/qt5/bin/rcc -name objects objects.qrc -o qrc_objects.cpp
 
 qrc_shaders.cpp: shaders.qrc \
 		/usr/lib/qt5/bin/rcc \
@@ -518,6 +530,9 @@ geometryengine.o: geometryengine.cpp geometryengine.h \
 
 qrc_maillages.o: qrc_maillages.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_maillages.o qrc_maillages.cpp
+
+qrc_objects.o: qrc_objects.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_objects.o qrc_objects.cpp
 
 qrc_shaders.o: qrc_shaders.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_shaders.o qrc_shaders.cpp

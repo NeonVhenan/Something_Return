@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sphere.off</file>
+    </qresource>
+    <qresource prefix="/new/prefix1">
+        <file>corridor.obj</file>
+        <file>corridor_s.obj</file>
+    </qresource>
+</RCC>

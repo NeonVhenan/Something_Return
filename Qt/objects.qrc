@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>corridor.obj</file>
+        <file>corridor_s.obj</file>       
+    </qresource>
+</RCC>
