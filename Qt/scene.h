@@ -10,7 +10,6 @@
 class Scene
 {
 private:
-    QString filename;
     QString name;
     QList<GameObject*> *objectList;
 
