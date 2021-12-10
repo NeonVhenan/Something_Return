@@ -28,6 +28,7 @@ HEADERS += \
     scene.h
 
 RESOURCES += \
+    maillages.qrc \
     shaders.qrc \
     textures.qrc
 
