@@ -144,12 +144,12 @@ GeometryEngine::GeometryEngine()
 
 
 // sphere.off
-    listeObjets.push_back(new GameObject(monde, loadOff("../Something_Return/Qt/sphere.off"), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00),
+    /*listeObjets.push_back(new GameObject(monde, loadOff("../Something_Return/Qt/sphere.off"), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00),
                                                                                    QVector3D(0.0f,1.0f,5.0f), 1.0f), false));
     listeObjets[i]->arrayBuf.create();
    listeObjets[i]->indexBuf.create();
 
-   monde->addEnfant(listeObjets[i++]);
+   monde->addEnfant(listeObjets[i++]);*/
 
     initCubeGeometry();
 

@@ -112,6 +112,9 @@ private:
     float angle = 0.0;
 
     bool course = false;
+
+    bool pause = false;
+    bool mouvement = false;
 };
 
 #endif // MAINWIDGET_H
