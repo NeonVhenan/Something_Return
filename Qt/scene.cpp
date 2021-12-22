@@ -75,7 +75,7 @@
 
     //VA PAS MARCHER
 
-    void generateListObjects(QList<GameObject*> listeObjets) {
+    /*void generateListObjects(QList<GameObject*> listeObjets) {
 
         int type = listeObjets.size();
         unsigned int i = 0;
@@ -151,4 +151,4 @@
                 break;
 
         }
-    }
+    }*/
