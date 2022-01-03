@@ -4,7 +4,7 @@ Mesh::Mesh(int indice)
 {
     switch(indice) {
 
-    /*case 0 :
+    case 0 :
         this->vertexNumber = 0;
         this->indexCount = 0;
 
@@ -12,7 +12,7 @@ Mesh::Mesh(int indice)
         this->indices = new GLushort[this->indexCount];
 
         this -> TextN=0;
-        break;*/
+        break;
 
     //Right Wall
     case 1 :
