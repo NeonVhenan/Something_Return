@@ -451,7 +451,7 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
             }
         }
         if(e->key() == Qt::Key_C){
-            printf("%f %f %f         %f %f %f\n",GeometryEngine::monde->collide.point1.x(), GeometryEngine::monde->collide.point1.y(), GeometryEngine::monde->collide.point1.z(), GeometryEngine::monde->collide.point2.x(), GeometryEngine::monde->collide.point2.y(), GeometryEngine::monde->collide.point2.z());
+            printf("%f %f %f         %f %f %f\n",GeometryEngine::monde->collideB.point1.x(), GeometryEngine::monde->collideB.point1.y(), GeometryEngine::monde->collideB.point1.z(), GeometryEngine::monde->collideB.point2.x(), GeometryEngine::monde->collideB.point2.y(), GeometryEngine::monde->collideB.point2.z());
         }
     }
     else{

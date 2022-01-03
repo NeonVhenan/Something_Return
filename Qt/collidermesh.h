@@ -1,24 +1,25 @@
 #ifndef COLLIDERMESH_H
 #define COLLIDERMESH_H
 
-#include "collider.h"
 #include "mesh.h"
 #include "colliderbox.h"
 
-class ColliderMesh : public Collider
+class ColliderMesh
 {
 public:
+    ColliderMesh();
     ColliderMesh(Mesh mesh);
-    void transform(Transform t, int i) override;
+    void transform(Transform t, int i);
     bool collision(ColliderBox * c);
     Mesh mesh;
+    bool defini;
 
-    float xmin() override;
-    float xmax() override;
-    float ymin() override;
-    float ymax() override;
-    float zmin() override;
-    float zmax() override;
+    float xmin();
+    float xmax();
+    float ymin();
+    float ymax();
+    float zmin();
+    float zmax();
 };
 
 #endif // COLLIDERMESH_H

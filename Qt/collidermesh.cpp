@@ -1,8 +1,15 @@
 #include "collidermesh.h"
 #include "geometryengine.h"
 
+ColliderMesh::ColliderMesh()
+{
+    this->defini = false;
+}
+
+
 ColliderMesh::ColliderMesh(Mesh mesh)
 {
+    this->defini = true;
     this->mesh = mesh;
 }
 
@@ -18,7 +25,17 @@ void ColliderMesh::transform(Transform t, int i)
 
 bool ColliderMesh::collision(ColliderBox * c)
 {
-
+    if(!ColliderBox(this->mesh).collision(c))
+        return false;
+    QVector3D p;
+    for(unsigned int i = 0; i < mesh.vertexNumber; i++){
+        p = mesh.vertices[i].position;
+        if((p.x() >= c->xmin() && p.x() <= c->xmax()) &&
+           (p.y() >= c->ymin() && p.y() <= c->ymax()) &&
+           (p.z() >= c->zmin() && p.z() <= c->zmax()))
+            return true;
+    }
+    return false;
 }
 
 float ColliderMesh::xmin(){

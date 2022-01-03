@@ -1,25 +1,24 @@
 #ifndef COLLIDERBOX_H
 #define COLLIDERBOX_H
 
-#include "collider.h"
 #include "transform.h"
 #include "mesh.h"
 
-class ColliderBox //: public Collider
+class ColliderBox
 {
 public:
     ColliderBox();
     ColliderBox(Mesh mesh);
     ColliderBox(QVector3D p1, QVector3D p2);
-    void transform(Transform t, int i) ;//override;
+    void transform(Transform t, int i) ;
     bool collision(ColliderBox * c);
 
-    float xmin() ;//override;
-    float xmax() ;//override;
-    float ymin() ;//override;
-    float ymax() ;//override;
-    float zmin() ;//override;
-    float zmax() ;//override;
+    float xmin() ;
+    float xmax() ;
+    float ymin() ;
+    float ymax() ;
+    float zmin() ;
+    float zmax() ;
 
     bool defini = false;
 

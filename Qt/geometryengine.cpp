@@ -54,7 +54,7 @@
 #include <QVector2D>
 #include <QVector3D>
 
-#define M_PI 3.1415926535897932384626433832795
+#define PI 3.1415926535897932384626433832795
 
 
 GameObject * GeometryEngine::monde = new GameObject(NULL, Mesh(0), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 0.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), false);
@@ -195,16 +195,16 @@ Mesh  GeometryEngine::loadOff(std::string filename){
 
  //   mesh.indices[mesh.indexCount];
 
-    for(int i=0; i<mesh.indexCount;i+=3) {
+    for(unsigned int i=0; i<mesh.indexCount;i+=3) {
         mesh.indices[i]= faces[i/3][0];
         mesh.indices[i+1]= faces[i/3][1];
         mesh.indices[i+2]= faces[i/3][2];
     }
 
-    for(int i=0; i<mesh.vertexNumber;i++) {
+    for(unsigned int i=0; i<mesh.vertexNumber;i++) {
         mesh.vertices[i]= {vertex[i], QVector2D(vertex[i][0]+vertex[i][1], vertex[i][0]+vertex[i][2])};
     }
-mesh.TextN=1;
+    mesh.TextN=1;
     return mesh;
 
 }
@@ -261,25 +261,50 @@ void GeometryEngine::drawGameObject(QOpenGLShaderProgram *program, quintptr offs
 }
 
 bool GeometryEngine::testCollision(GameObject * obj){
-    ColliderBox *c = new ColliderBox(obj->collide.point1, obj->collide.point2);
-    if(obj->parent == NULL)
-        c->transform(obj->transform, 0);
-    else {
-        c->transform(obj->transform, 1);
-    }
-    if(c->collision(new ColliderBox(QVector3D(-1.5,0.0,-1.5), QVector3D(1.5, 3.5, 1.5)))){//test collision sans oublié le transform bloc/bloc
-        if(!obj->child->isEmpty()){
-            for(int i = 0 ; i < obj->child->size(); i++){
-                if(testCollision(obj->child->at(i))){
-                    return true;
+    if(obj->type == 2){
+        ColliderBox *c = new ColliderBox(obj->collideB.point1, obj->collideB.point2);
+        if(obj->parent == NULL)
+            c->transform(obj->transform, 0);
+        else {
+            c->transform(obj->transform, 1);
+        }
+        if(c->collision(new ColliderBox(QVector3D(-1.5,0.0,-1.5), QVector3D(1.5, 3.5, 1.5)))){//test collision sans oublié le transform bloc/bloc
+            if(!obj->child->isEmpty()){
+                for(int i = 0 ; i < obj->child->size(); i++){
+                    if(testCollision(obj->child->at(i))){
+                        return true;
+                    }
                 }
+                return false;
             }
+            else
+                return true;
+        }
+        else {
             return false;
         }
-        else
-            return true;
     }
-    else {
-        return false;
+    else{
+        ColliderMesh *c = new ColliderMesh(obj->collideM.mesh);
+        if(obj->parent == NULL)
+            c->transform(obj->transform, 0);
+        else {
+            c->transform(obj->transform, 1);
+        }
+        if(c->collision(new ColliderBox(QVector3D(-1.5,0.0,-1.5), QVector3D(1.5, 3.5, 1.5)))){//test collision sans oublié le transform bloc/bloc
+            if(!obj->child->isEmpty()){
+                for(int i = 0 ; i < obj->child->size(); i++){
+                    if(testCollision(obj->child->at(i))){
+                        return true;
+                    }
+                }
+                return false;
+            }
+            else
+                return true;
+        }
+        else {
+            return false;
+        }
     }
 }

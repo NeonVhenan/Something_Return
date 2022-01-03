@@ -3,7 +3,7 @@
 
 #include "mesh.h"
 #include "transform.h"
-#include "collider.h"
+#include "collidermesh.h"
 #include "colliderbox.h"
 
 #include <QList>
@@ -12,7 +12,7 @@
 class GameObject
 {
 public:
-    //GameObject(GameObject *parent, Mesh mesh, Transform transform, Mesh collide);
+    GameObject(GameObject *parent, Mesh mesh, Transform transform, Mesh collide);
     GameObject(GameObject *parent, Mesh mesh, Transform transform, bool aCollider);
     GameObject();
     ~GameObject();
@@ -22,7 +22,9 @@ public:
     GameObject *parent;
     Mesh mesh;
     Transform transform;
-    ColliderBox collide;
+    ColliderBox collideB;
+    ColliderMesh collideM;
+    int type; //type = 1 -> colliderMesh, type = 2 -> colliderBox
 
 
     QOpenGLBuffer arrayBuf;
