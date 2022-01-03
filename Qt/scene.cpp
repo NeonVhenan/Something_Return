@@ -39,12 +39,19 @@
 
     void Scene::deleteGameObject(GameObject* object) {
 
-        objectList.erase(remove(objectList.begin(), objectList.end(), object), objectList.end());
+        int size = objectList.size();
+
+        for(int i = 0; i < size; i++) {
+
+            objectList.removeOne(object);
+
+            }
+        //objectList.erase(remove(objectList.begin(), objectList.end(), object), objectList.end());
     }
 
-    Scene::QVector<GameObject*> findChildren(GameObject* object) {
+    QList<GameObject*> Scene::findChildren(const GameObject* object) {
 
-        QVector<GameObject*> result;
+        QList<GameObject*> result;
         int size = objectList.size();
 
         for(int i = 0; i < size; i++) {

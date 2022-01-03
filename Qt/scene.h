@@ -4,7 +4,7 @@
 #include <QDir>
 #include <QFile>
 #include <QString>
-#include <QVector>
+#include <QList>
 
 #include "gameobject.h"
 
@@ -12,14 +12,14 @@ class Scene
 {
 protected:
     QString name;
-    QVector<GameObject*> objectList;
+    QList<GameObject*> objectList;
 
 public:
     Scene();
     virtual ~Scene();
     Scene(QString name);
     Scene(GameObject *object);
-    QVector<GameObject*> findChildren(const GameObject* object);
+    QList<GameObject*> findChildren(const GameObject* object);
 
     //void generateListObject();
     void addGameObject(GameObject* object);

@@ -133,7 +133,7 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
         close();
     }
     if(!pause){
-        if(e->key() == Qt::Key_Enter){
+        if(e->key() == Qt::Key_Space) {
             pause = true;
         }
 
@@ -455,7 +455,7 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
         }
     }
     else{
-        if(e->key() == Qt::Key_Enter){
+        if(e->key() == Qt::Key_Space){
             pause = false;
         }
     }
