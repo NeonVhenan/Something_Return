@@ -4,22 +4,27 @@
 #include <QDir>
 #include <QFile>
 #include <QString>
+#include <QVector>
 
 #include "gameobject.h"
 
 class Scene
 {
-private:
+protected:
     QString name;
-    QList<GameObject*> *objectList;
+    QVector<GameObject*> objectList;
 
 public:
     Scene();
     virtual ~Scene();
-   Scene(GameObject *object);
-
-    void generateListObject();
     Scene(QString name);
+    Scene(GameObject *object);
+    QVector<GameObject*> findChildren(const GameObject* object);
+
+    //void generateListObject();
+    void addGameObject(GameObject* object);
+    void updateGameObject(GameObject* object);
+    void deleteGameObject(GameObject* object);
 };
 
 #endif // SCENE_H

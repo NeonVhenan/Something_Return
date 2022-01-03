@@ -4,6 +4,8 @@
 #include <QList>
 #include <QTextStream>
 #include <QIODevice>
+#include <QtAlgorithms>
+#include <QStack>
 
 #include <stdio.h>
 
@@ -20,135 +22,48 @@
         this->name = name;
     }
 
-    /*
-     * Créer une arborescence suivant ce modèle :
-     * lire dans un dossier le nom des GameObjects à charger
-     * trouver dans leur(s) dossier(s) enfant(s) les fichiers contenant
-     * le Mesh (texture/couleur ?), (la Transformation ?) et le Collider
-     *  puis charger les objets dans l'odre de la liste
-     *
-     * Transform à l'identité si rien
-     *
-     * Mesh -> ID through ObjFile?
-     */
+    void Scene::addGameObject(GameObject* object) {
 
- /*void Scene::generateListObject() {
+        if(qFind(objectList.begin(), objectList.end(), object) != objectList.end()) {
 
-     /*Structure du fichier :
-      * chargement de ce dont a besoin un GameObject :
-      * parent = monde ou le GameObject précédent
-      * mesh = mesh à appliquer (int à implémenter)
-      * tranform = float
-      * collider = float
-      *
-      * charger le gameobject en dernier
-      *
-      * inclure la ligne séparatrice
-      *
-      * Passer à l'objet suivant
-      *
-
-      QFile file(name);
-
-      QString separator = "--------------------";
-
-      //Files list
-      if(!file.open(QIODevice::ReadOnly)) {
-
-          return;
-      }
-
-      printf("blbl \n");
-
-      QTextStream in(&file);
-
-      while(!in.atEnd()) {
-
-          printf("work \n");
-
-          QString line = in.readLine();
-          in << "Line is: " << line << "\n";
-      }
-
-      file.close();
-  }*/
-
-    //VA PAS MARCHER
-
-    /*void generateListObjects(QList<GameObject*> listeObjets) {
-
-        int type = listeObjets.size();
-        unsigned int i = 0;
-        GeometryEngine::monde;
-
-        switch (type) {
-
-            case 1 :
-
-                listeObjets.push_back(new GameObject(GeometryEngine::monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0))));
-                listeObjets[i]->arrayBuf.create();
-                listeObjets[i]->indexBuf.create();
-
-                GeometryEngine::monde->addEnfant(listeObjets[i++]);
-
-                listeObjets.push_back(new GameObject(GeometryEngine::monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00), QVector3D(0.0f,0.0f,0.0f), 1.0f),
-                                                     ColliderBox(QVector3D(0, -1.0,0), QVector3D(0, -1.0, 0.0))));
-                listeObjets[i]->arrayBuf.create();
-                listeObjets[i]->indexBuf.create();
-
-                GeometryEngine::monde->addEnfant(listeObjets[i++]);
-
-                listeObjets.push_back(new GameObject(GeometryEngine::monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 6.0, 0.0))));
-                listeObjets[i]->arrayBuf.create();
-                listeObjets[i]->indexBuf.create();
-
-                GeometryEngine::monde->addEnfant(listeObjets[i++]);
-
-                break;
-
-            case 2 :
-
-                //Left
-                listeObjets.push_back(new GameObject(GeometryEngine::monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0))));
-                listeObjets[i]->arrayBuf.create();
-                listeObjets[i]->indexBuf.create();
-
-                GeometryEngine::monde->addEnfant(listeObjets[i++]);
-
-                listeObjets.push_back(new GameObject(GeometryEngine::monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90),
-                                                                QVector3D(24.0f,0.0f,0.0f), 1.0f), ColliderBox(QVector3D(0, -1.0,0), QVector3D(0, -1.0, 0.0))));
-                listeObjets[i]->arrayBuf.create();
-                listeObjets[i]->indexBuf.create();
-
-                GeometryEngine::monde->addEnfant(listeObjets[i++]);
-
-                listeObjets.push_back(new GameObject(GeometryEngine::monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,-4.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 6.0, 0.0))));
-                listeObjets[i]->arrayBuf.create();
-                listeObjets[i]->indexBuf.create();
-
-                GeometryEngine::monde->addEnfant(listeObjets[i++]);
-
-                //Right
-                listeObjets.push_back(new GameObject(GeometryEngine::monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,20.0f), 1.0f), ColliderBox(QVector3D(3.5, 0.0, -20.0), QVector3D(4.5, 6.0, 0.0))));
-                listeObjets[i]->arrayBuf.create();
-                listeObjets[i]->indexBuf.create();
-
-                GeometryEngine::monde->addEnfant(listeObjets[i++]);
-
-                listeObjets.push_back(new GameObject(GeometryEngine::monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90),
-                                                           QVector3D(24.0f,0.0f,20.0f), 1.0f), ColliderBox(QVector3D(0, -1.0,0), QVector3D(0, -1.0, 0.0))));
-                listeObjets[i]->arrayBuf.create();
-                listeObjets[i]->indexBuf.create();
-
-                GeometryEngine::monde->addEnfant(listeObjets[i++]);
-
-                listeObjets.push_back(new GameObject(GeometryEngine::monde, Mesh(3), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,24.0f), 1.0f), ColliderBox(QVector3D(-4.5, 0.0,-20.0), QVector3D(-3.5, 6.0, 0.0))));
-                listeObjets[i]->arrayBuf.create();
-                listeObjets[i]->indexBuf.create();
-
-                GeometryEngine::monde->addEnfant(listeObjets[i++]);
-
-                break;
-
+            objectList.append(object);
+            return;
         }
-    }*/
+
+        objectList.push_back(object);
+    }
+
+    void Scene::updateGameObject(GameObject* object) {
+
+    }
+
+    void Scene::deleteGameObject(GameObject* object) {
+
+        objectList.erase(remove(objectList.begin(), objectList.end(), object), objectList.end());
+    }
+
+    Scene::QVector<GameObject*> findChildren(GameObject* object) {
+
+        QVector<GameObject*> result;
+        int size = objectList.size();
+
+        for(int i = 0; i < size; i++) {
+
+            if(objectList[i] == 0 || objectList[i] == object) {
+
+                continue;
+            }
+
+            GameObject* iterator = objectList[i]->parent;
+
+            if(iterator != 0) {
+
+                result.push_back(objectList[i]);
+                continue;
+            }
+
+            iterator = iterator->parent;
+    }
+
+        return result;
+ }
