@@ -53,7 +53,6 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = main.cpp \
-		collider.cpp \
 		colliderbox.cpp \
 		collidermesh.cpp \
 		gameobject.cpp \
@@ -67,7 +66,6 @@ SOURCES       = main.cpp \
 		qrc_textures.cpp \
 		moc_mainwidget.cpp
 OBJECTS       = main.o \
-		collider.o \
 		colliderbox.o \
 		collidermesh.o \
 		gameobject.o \
@@ -157,7 +155,7 @@ DIST          = scene/scene.txt \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		gameengine.pro collider.h \
+		gameengine.pro \
 		colliderbox.h \
 		collidermesh.h \
 		gameobject.h \
@@ -166,7 +164,6 @@ DIST          = scene/scene.txt \
 		mesh.h \
 		transform.h \
 		scene.h main.cpp \
-		collider.cpp \
 		colliderbox.cpp \
 		collidermesh.cpp \
 		gameobject.cpp \
@@ -363,8 +360,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents maillages.qrc objects.qrc shaders.qrc textures.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents collider.h colliderbox.h collidermesh.h gameobject.h mainwidget.h geometryengine.h mesh.h transform.h scene.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp collider.cpp colliderbox.cpp collidermesh.cpp gameobject.cpp mesh.cpp transform.cpp scene.cpp mainwidget.cpp geometryengine.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents colliderbox.h collidermesh.h gameobject.h mainwidget.h geometryengine.h mesh.h transform.h scene.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp colliderbox.cpp collidermesh.cpp gameobject.cpp mesh.cpp transform.cpp scene.cpp mainwidget.cpp geometryengine.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -438,7 +435,6 @@ moc_mainwidget.cpp: mainwidget.h \
 		gameobject.h \
 		mesh.h \
 		transform.h \
-		collider.h \
 		colliderbox.h \
 		BasicIO.h \
 		moc_predefs.h \
@@ -466,17 +462,11 @@ main.o: main.cpp mainwidget.h \
 		gameobject.h \
 		mesh.h \
 		transform.h \
-		collider.h \
 		colliderbox.h \
 		BasicIO.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
-collider.o: collider.cpp collider.h \
-		transform.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o collider.o collider.cpp
-
 colliderbox.o: colliderbox.cpp colliderbox.h \
-		collider.h \
 		transform.h \
 		mesh.h \
 		geometryengine.h \
@@ -485,7 +475,6 @@ colliderbox.o: colliderbox.cpp colliderbox.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o colliderbox.o colliderbox.cpp
 
 collidermesh.o: collidermesh.cpp collidermesh.h \
-		collider.h \
 		transform.h \
 		mesh.h \
 		colliderbox.h \
@@ -497,7 +486,6 @@ collidermesh.o: collidermesh.cpp collidermesh.h \
 gameobject.o: gameobject.cpp gameobject.h \
 		mesh.h \
 		transform.h \
-		collider.h \
 		colliderbox.h \
 		collidermesh.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gameobject.o gameobject.cpp
@@ -512,7 +500,6 @@ scene.o: scene.cpp scene.h \
 		gameobject.h \
 		mesh.h \
 		transform.h \
-		collider.h \
 		colliderbox.h \
 		geometryengine.h \
 		BasicIO.h
@@ -523,7 +510,6 @@ mainwidget.o: mainwidget.cpp mainwidget.h \
 		gameobject.h \
 		mesh.h \
 		transform.h \
-		collider.h \
 		colliderbox.h \
 		BasicIO.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwidget.o mainwidget.cpp
@@ -532,7 +518,6 @@ geometryengine.o: geometryengine.cpp geometryengine.h \
 		gameobject.h \
 		mesh.h \
 		transform.h \
-		collider.h \
 		colliderbox.h \
 		BasicIO.h \
 		scene.h
