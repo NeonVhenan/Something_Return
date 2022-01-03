@@ -1,0 +1,21 @@
+#include <QDir>
+#include <QFile>
+#include <QString>
+#include <QList>
+#include <QTextStream>
+#include <QIODevice>
+
+#include <stdio.h>
+
+#include "scene.h"
+#include "gameobject.h"
+#include "geometryengine.h"
+
+    Scene::Scene() { }
+
+    Scene::~Scene() { }
+
+    Scene::Scene(QString name) {
+
+        this->name = name;
+    }

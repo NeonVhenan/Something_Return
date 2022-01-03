@@ -1,6 +1,10 @@
 <RCC>
     <qresource prefix="/">
-        <file>corridor.obj</file>
-        <file>corridor_s.obj</file>       
+        <file>scene/corridor.off</file>
+        <file>scene/corridor_back.off</file>
+        <file>scene/corridor_ground.off</file>
+        <file>scene/corridor_left.off</file>
+        <file>scene/corridor_right.off</file>
+        <file>scene/corridor_top.off</file>
     </qresource>
 </RCC>

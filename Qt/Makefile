@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = gameengine1.0.0
-DISTDIR = /home/e20160008843/M2/Projet\ 3D/Something_Return-main/Qt/.tmp/gameengine1.0.0
+DISTDIR = /home/eirin/Téléchargements/Something_Return-main/Qt/.tmp/gameengine1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
 LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so /usr/lib/x86_64-linux-gnu/libGL.so -lpthread   
@@ -393,15 +393,22 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_maillages.cpp qrc_objects.cpp qrc_shaders.cpp qrc_textures.cpp
 qrc_maillages.cpp: maillages.qrc \
 		/usr/lib/qt5/bin/rcc \
-		sphere.off \
-		corridor.obj \
-		corridor_s.obj
+		scene/corridor_back.off \
+		scene/corridor.off \
+		scene/corridor_ground.off \
+		scene/corridor_left.off \
+		scene/corridor_top.off \
+		scene/corridor_right.off
 	/usr/lib/qt5/bin/rcc -name maillages maillages.qrc -o qrc_maillages.cpp
 
 qrc_objects.cpp: objects.qrc \
 		/usr/lib/qt5/bin/rcc \
-		corridor.obj \
-		corridor_s.obj
+		scene/corridor_back.off \
+		scene/corridor.off \
+		scene/corridor_ground.off \
+		scene/corridor_left.off \
+		scene/corridor_top.off \
+		scene/corridor_right.off
 	/usr/lib/qt5/bin/rcc -name objects objects.qrc -o qrc_objects.cpp
 
 qrc_shaders.cpp: shaders.qrc \
@@ -413,7 +420,8 @@ qrc_shaders.cpp: shaders.qrc \
 qrc_textures.cpp: textures.qrc \
 		/usr/lib/qt5/bin/rcc \
 		ground.png \
-		wall.png
+		wall.png \
+		door.png
 	/usr/lib/qt5/bin/rcc -name textures textures.qrc -o qrc_textures.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -435,7 +443,7 @@ moc_mainwidget.cpp: mainwidget.h \
 		BasicIO.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include '/home/e20160008843/M2/Projet 3D/Something_Return-main/Qt/moc_predefs.h' -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I'/home/e20160008843/M2/Projet 3D/Something_Return-main/Qt' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwidget.h -o moc_mainwidget.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/eirin/Téléchargements/Something_Return-main/Qt/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/eirin/Téléchargements/Something_Return-main/Qt -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwidget.h -o moc_mainwidget.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -505,7 +513,9 @@ scene.o: scene.cpp scene.h \
 		mesh.h \
 		transform.h \
 		collider.h \
-		colliderbox.h
+		colliderbox.h \
+		geometryengine.h \
+		BasicIO.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scene.o scene.cpp
 
 mainwidget.o: mainwidget.cpp mainwidget.h \

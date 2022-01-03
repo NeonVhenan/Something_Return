@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>wall.png</file>
         <file>ground.png</file>
+        <file>door.png</file>
     </qresource>
 </RCC>
