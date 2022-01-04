@@ -13,64 +13,72 @@
 #include "gameobject.h"
 #include "geometryengine.h"
 
-    Scene::Scene() { }
+Scene::~Scene() { }
 
-    Scene::~Scene() { }
+Scene::Scene(QString name) {
 
-    Scene::Scene(QString name) {
+    this->name = name;
+}
 
-        this->name = name;
+void Scene::addGameObject(GameObject* object) {
+
+    if(qFind(objectList.begin(), objectList.end(), object) != objectList.end()) {
+
+    objectList.append(object);
+    return;
     }
 
-    void Scene::addGameObject(GameObject* object) {
+    objectList.push_back(object);
+}
 
-        if(qFind(objectList.begin(), objectList.end(), object) != objectList.end()) {
+void Scene::deleteGameObject(GameObject* object) {
 
-            objectList.append(object);
-            return;
+    int size = objectList.size();
+
+    for(unsigned int i = 0; i < size; i++) {
+
+        objectList.removeOne(object);
+        //objectList.erase(remove(objectList.begin(), objectList.end(), object), objectList.end());
+
+    }
+}
+
+/*QList<GameObject*> Scene::findChildren(const GameObject* object) {
+
+    QList<GameObject*> result;
+    int size = objectList.size();
+
+    for(int i = 0; i < size; i++) {
+
+        if(objectList[i] == 0 || objectList[i] == object) {
+
+            continue;
         }
 
-        objectList.push_back(object);
+        GameObject* iterator = objectList[i]->parent;
+
+        if(iterator != 0) {
+
+            result.push_back(objectList[i]);
+            continue;
+        }
+
+        iterator = iterator->parent;
     }
 
-    void Scene::updateGameObject(GameObject* object) {
+    return result;
+}*/
 
-    }
+void Scene::updateScene(GameObject* object) {
 
-    void Scene::deleteGameObject(GameObject* object) {
+}
 
-        int size = objectList.size();
+Scene::Scene() {
 
-        for(int i = 0; i < size; i++) {
-
-            objectList.removeOne(object);
-
-            }
-        //objectList.erase(remove(objectList.begin(), objectList.end(), object), objectList.end());
-    }
-
-    QList<GameObject*> Scene::findChildren(const GameObject* object) {
-
-        QList<GameObject*> result;
-        int size = objectList.size();
-
-        for(int i = 0; i < size; i++) {
-
-            if(objectList[i] == 0 || objectList[i] == object) {
-
-                continue;
-            }
-
-            GameObject* iterator = objectList[i]->parent;
-
-            if(iterator != 0) {
-
-                result.push_back(objectList[i]);
-                continue;
-            }
-
-            iterator = iterator->parent;
-    }
-
-        return result;
- }
+    /*
+     * paramètres : coordonnées du plan de la première porte rencontrée
+     * créer liste des enfants de monde correspondant à la scène actuelle
+     * coordonnées de la porte forcant le chargement du dernier couloir de scène 1 + un autre couloir afin de créer la scène 2
+     *
+     */
+}

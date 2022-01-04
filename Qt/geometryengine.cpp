@@ -70,10 +70,8 @@ GeometryEngine::GeometryEngine()
     monde->arrayBuf.create();
     monde->indexBuf.create();
 
-    monde->arrayBuf.create();
-    monde->indexBuf.create();
-
     unsigned int i = 0;
+
     listeObjets.push_back(new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), true));
     listeObjets[i]->arrayBuf.create();
     listeObjets[i]->indexBuf.create();
@@ -209,7 +207,6 @@ Mesh  GeometryEngine::loadOff(std::string filename){
 
 }
 
-
 void GeometryEngine::draw(QOpenGLShaderProgram *program)
 {
     quintptr offset = 0;
@@ -220,7 +217,7 @@ void GeometryEngine::draw(QOpenGLShaderProgram *program)
 
     int texcoordLocation = program->attributeLocation("a_texcoord");
 
-    drawGameObject(program, offset, mat, vertexLocation, texcoordLocation, monde);
+    drawGameObject(program, offset, mat, vertexLocation, texcoordLocation, monde); //objectList[0]
 }
 
 

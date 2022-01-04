@@ -23,8 +23,9 @@ public:
 
     //void generateListObject();
     void addGameObject(GameObject* object);
-    void updateGameObject(GameObject* object);
     void deleteGameObject(GameObject* object);
+
+    void updateScene(GameObject* object);
 };
 
 #endif // SCENE_H
