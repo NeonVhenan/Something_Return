@@ -8,20 +8,29 @@
 
 #include "gameobject.h"
 
-class Scene
-{
+class Scene {
+
 protected:
     QString name;
     QList<GameObject*> objectList;
+    QVector3D passage1;
+    QVector3D passage2;
+    int step = 1;
+    Scene previous;
+    Scene next;
 
 public:
     Scene();
     virtual ~Scene();
     Scene(QString name);
+
     Scene(GameObject *object);
-    QList<GameObject*> findChildren(const GameObject* object);
+    //QList<GameObject*> findChildren(const GameObject* object);
 
     //void generateListObject();
+    void loadScene();
+    void unloadScene();
+
     void addGameObject(GameObject* object);
     void deleteGameObject(GameObject* object);
 
