@@ -62,6 +62,7 @@ MainWidget::MainWidget(QWidget *parent) :
 
     angularSpeed(0)
 {
+    scenes_en_cours = new QList<Scene>();
 }
 
 MainWidget::~MainWidget()

@@ -63,6 +63,8 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLTexture>
 
+#include "scene.h"
+
 class GeometryEngine;
 
 class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_1
@@ -72,6 +74,7 @@ class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_1
 public:
     explicit MainWidget(QWidget *parent = 0);
     ~MainWidget();
+    static QList<Scene *> * scenes_en_cours;
 
 protected:
     void mousePressEvent(QMouseEvent *e) override;
