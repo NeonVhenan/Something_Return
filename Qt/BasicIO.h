@@ -86,7 +86,7 @@ template< class point_t , class type_t > bool open( const std::string & filename
                                                     bool convertToTriangles = true,
                                                     bool randomize = false )
 {
-    QString fEmp = QCoreApplication::applicationDirPath()+ QDir::separator() +"sphere.off";
+    QString fEmp = QCoreApplication::applicationDirPath()+ QDir::separator();
     std::cout <<"ici         "<< qPrintable(fEmp) <<std::endl;
     char cCurrentPath[FILENAME_MAX];
     if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
@@ -97,7 +97,7 @@ template< class point_t , class type_t > bool open( const std::string & filename
     qDebug("The current working directory is %s", cCurrentPath);
     std::ifstream myfile;
     std::string path =(cCurrentPath);
-    path = path +"\\debug\\sphere.off";
+    path = path +"\\debug\\"+filename;
   //  std::cout << path <<" testtttt" << std::endl;
     myfile.open(/*path.c_str());//*/filename.c_str());
   /*  if (!myfile.is_open())

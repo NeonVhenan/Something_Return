@@ -51,18 +51,18 @@
 #include "mainwidget.h"
 #include <QMouseEvent>
 #include <math.h>
+#include <time.h>
 
-
+QList<Scene*> * MainWidget::scenes_en_cours = new QList<Scene*>();
 
 MainWidget::MainWidget(QWidget *parent) :
     QOpenGLWidget(parent),
     geometries(0),
     murs(0),
     sol(0),
-
+    porte(0),
     angularSpeed(0)
 {
-    scenes_en_cours = new QList<Scene>();
 }
 
 MainWidget::~MainWidget()
@@ -72,6 +72,7 @@ MainWidget::~MainWidget()
     makeCurrent();
     delete murs;
     delete sol;
+    delete porte;
     delete geometries;
     doneCurrent();
 }
@@ -518,7 +519,7 @@ void MainWidget::initShaders()
 //! [4]
 void MainWidget::initTextures()
 {
-    // Load cube.png image
+    // Load wall.png image
     murs = new QOpenGLTexture(QImage(":/wall.png").mirrored());
 
     // Set nearest filtering mode for texture minification
@@ -531,7 +532,7 @@ void MainWidget::initTextures()
     murs->setWrapMode(QOpenGLTexture::Repeat);
 
 
-    // Load cube.png image
+    // Load ground.png image
     sol = new QOpenGLTexture(QImage(":/ground.png").mirrored());
 
     // Set nearest filtering mode for texture minification
@@ -542,6 +543,18 @@ void MainWidget::initTextures()
     // Wrap texture coordinates by repeating
     // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
     sol->setWrapMode(QOpenGLTexture::Repeat);
+
+    // Load door.png image
+    porte = new QOpenGLTexture(QImage(":/door.png").mirrored());
+
+    // Set nearest filtering mode for texture minification
+    porte->setMinificationFilter(QOpenGLTexture::NearestMipMapLinear);
+
+    // Set bilinear filtering mode for texture magnification
+    porte->setMagnificationFilter(QOpenGLTexture::LinearMipMapLinear);
+    // Wrap texture coordinates by repeating
+    // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
+    porte->setWrapMode(QOpenGLTexture::Repeat);
 
 }
 //! [4]
@@ -570,6 +583,7 @@ void MainWidget::paintGL()
 
     murs->bind(0);
     sol->bind(1);
+    porte->bind(2);
 
 //! [6]
     QMatrix4x4 matrix;
@@ -585,6 +599,8 @@ void MainWidget::paintGL()
     // Use texture unit 0 which contains cube.png
     program.setUniformValue("murs", 0);
     program.setUniformValue("sol", 1);
+    program.setUniformValue("porte", 2);
+
 
     // Draw cube geometry
     geometries->draw(&program);

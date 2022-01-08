@@ -63,6 +63,7 @@ GameObject * GeometryEngine::monde = new GameObject(NULL, Mesh(0), Transform(QQu
 GeometryEngine::GeometryEngine()
     : indexBuf(QOpenGLBuffer::IndexBuffer)
 {
+    srand(time(NULL));
     initializeOpenGLFunctions();
     arrayBuf.create();
     indexBuf.create();
@@ -70,7 +71,7 @@ GeometryEngine::GeometryEngine()
     monde->arrayBuf.create();
     monde->indexBuf.create();
 
-    unsigned int i = 0;
+    /*unsigned int i = 0;
 
     listeObjets.push_back(new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 0), QVector3D(0.0f,0.0f,0.0f), 1.0f), true));
     listeObjets[i]->arrayBuf.create();
@@ -84,7 +85,7 @@ GeometryEngine::GeometryEngine()
     listeObjets[i]->indexBuf.create();
 
     monde->addEnfant(listeObjets[i++]);
-    //mise à jour collider monde
+    //mise à jour collider monde*/
 
 //    listeObjets.push_back(new GameObject(monde, Mesh(1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,0.0f), 1.0f), true));
 //    listeObjets[i]->arrayBuf.create();
@@ -115,11 +116,11 @@ GeometryEngine::GeometryEngine()
     //mise à jour collider monde
 
 
-    listeObjets.push_back(new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00), QVector3D(0.0f,0.0f,0.0f), 1.0f), false));
+    /*listeObjets.push_back(new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00), QVector3D(0.0f,0.0f,0.0f), 1.0f), false));
     listeObjets[i]->arrayBuf.create();
     listeObjets[i]->indexBuf.create();
 
-    monde->addEnfant(listeObjets[i++]);
+    monde->addEnfant(listeObjets[i++]);*/
 
 
 //    listeObjets.push_back(new GameObject(monde, Mesh(2), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 90), QVector3D(24.0f,0.0f,0.0f), 1.0f), true));
@@ -148,6 +149,11 @@ GeometryEngine::GeometryEngine()
    listeObjets[i]->indexBuf.create();
 
    monde->addEnfant(listeObjets[i++]);*/
+
+    Scene * s = new Scene(QVector3D(0.0,0.0,-1.0), NULL, 1, QVector3D(0.0f,0.0f,0.0f), 0.0);
+    s->loadScene();
+
+    printf("%d\n", monde->child->size());
 
     initCubeGeometry();
 
@@ -204,8 +210,45 @@ Mesh  GeometryEngine::loadOff(std::string filename){
     }
     mesh.TextN=1;
     return mesh;
-
 }
+
+
+Mesh  GeometryEngine::loadOffSimple(char * filename){
+    FILE * f;
+    char type[50];
+    if((f = fopen(filename, "r")) != NULL){
+        fscanf(f,"%s", type);
+        if(strcmp(type, "OFFS") != 0) {
+            printf("TYPE DE FICHIER %s ET NON OFFS\n", type);
+            return Mesh();
+        }
+        int nbTri;
+        Mesh mesh = Mesh();
+        fscanf(f,"%d %d", &mesh.vertexNumber, &nbTri);
+        mesh.indexCount = nbTri * 3;
+        mesh.vertices = new VertexData[mesh.vertexNumber];
+        mesh.indices = new GLushort[mesh.indexCount];
+        float x, y, z, xt, yt;
+        for(unsigned int i = 0; i < mesh.vertexNumber; i++){
+            fscanf(f,"%f %f %f %f %f", &x, &y, &z, &xt, &yt);
+            mesh.vertices[i] = {QVector3D(x, y, z), QVector2D(xt, yt)};
+        }
+        int p1, p2, p3;
+        for(unsigned int i = 0; i < mesh.indexCount; i+=3){
+            fscanf(f,"%d %d %d", &p1, &p2, &p3);
+            mesh.indices[i] = p1;
+            mesh.indices[i+1] = p2;
+            mesh.indices[i+2] = p3;
+        }
+        fscanf(f,"%d", &mesh.TextN);
+        return mesh;
+    }
+    else{
+        printf("Impossible d'ouvrir le fichier\n");
+        return Mesh();
+    }
+}
+
 
 void GeometryEngine::draw(QOpenGLShaderProgram *program)
 {

@@ -97,6 +97,7 @@ private:
 
     QOpenGLTexture *murs;
     QOpenGLTexture *sol;
+    QOpenGLTexture *porte;
 
 
     QMatrix4x4 projection;

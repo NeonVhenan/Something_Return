@@ -55,6 +55,7 @@
 #include <QOpenGLFunctions_3_1>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
+#include <time.h>
 
 #include "BasicIO.h"
 
@@ -70,7 +71,8 @@ public:
 
     static bool testCollision(GameObject * obj);
 
-    Mesh loadOff(std::string filename);
+    static Mesh loadOff(std::string filename);
+    static Mesh loadOffSimple(char * filename);
 
 private:
     void initCubeGeometry();
