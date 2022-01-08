@@ -38,8 +38,8 @@ ColliderBox::ColliderBox(Mesh mesh)
         }
     }
 
-    this->point1 = QVector3D(xmin-0.15, ymin-0.15, zmin-0.15);
-    this->point2 = QVector3D(xmax+0.15, ymax+0.15, zmax+0.15);
+    this->point1 = QVector3D(xmin-0.15, ymin-0.05, zmin-0.15);
+    this->point2 = QVector3D(xmax+0.15, ymax+0.05, zmax+0.15);
     this->defini = true;
 }
 

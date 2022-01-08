@@ -206,6 +206,7 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
             default :
                 GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, d));
                 if(GeometryEngine::testCollision(GeometryEngine::monde)){
+                    printf("collision\n");
                     GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.0f, -1.0f*d));
                 }
                 else{

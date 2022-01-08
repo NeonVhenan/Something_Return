@@ -51,7 +51,7 @@ Scene::Scene(QVector3D v1, Scene * s1, int type_scene, QVector3D translation, fl
     case 1:
         addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(back), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(0.0f,0.0f,-20.0f) + translation), 1.0f), true));
         addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(wall1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(0.0f,0.0f,0.0f) + translation), 1.0f), true));
-        addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(wall1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 /*+ angle*/), (QVector3D(8.0f,0.0f,0.0f) /*+ translation*/), 1.0f), true));
+        addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(wall1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(8.0f,0.0f,0.0f) + translation), 1.0f), true));
         addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(floor1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(0.0f,0.0f,0.0f) + translation), 1.0f), true));
         addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(floor1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(0.0f,6.0f,0.0f) + translation), 1.0f), true));
         addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(back), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(8.0f,0.0f,0.0f) + translation), 1.0f), true));
