@@ -20,7 +20,7 @@ class Scene
 {
 protected:
     QString name;
-    QList<GameObject*> objectList;
+    QList<GameObject*> *objectList;
     QVector3D passage1;
     QVector3D passage2;
     int step = 1;

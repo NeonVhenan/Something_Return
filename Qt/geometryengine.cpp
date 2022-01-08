@@ -142,18 +142,8 @@ GeometryEngine::GeometryEngine()
     //scene->generateListObject();
 
 
-// sphere.off
-    /*listeObjets.push_back(new GameObject(monde, loadOff("../Something_Return/Qt/sphere.off"), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00),
-                                                                                   QVector3D(0.0f,1.0f,5.0f), 1.0f), false));
-    listeObjets[i]->arrayBuf.create();
-   listeObjets[i]->indexBuf.create();
-
-   monde->addEnfant(listeObjets[i++]);*/
-
-    Scene * s = new Scene(QVector3D(0.0,0.0,-1.0), NULL, 1, QVector3D(0.0f,0.0f,0.0f), 0.0);
+    Scene * s = new Scene(QVector3D(0.0f,0.0f,-1.0f), NULL, 1, QVector3D(0.0f,0.0f,0.0f), 0);
     s->loadScene();
-
-    printf("%d\n", monde->child->size());
 
     initCubeGeometry();
 
@@ -173,15 +163,6 @@ void GeometryEngine::initCubeGeometry()
 
     monde->indexBuf.bind();
     monde->indexBuf.allocate(monde->mesh.indices,  monde->mesh.indexCount* sizeof(GLushort));
-
-    for(int i = 0; i < listeObjets.size(); i++){
-        listeObjets[i]->arrayBuf.bind();
-        listeObjets[i]->arrayBuf.allocate(listeObjets[i]->mesh.vertices, listeObjets[i]->mesh.vertexNumber * sizeof(VertexData));
-
-        listeObjets[i]->indexBuf.bind();
-        listeObjets[i]->indexBuf.allocate(listeObjets[i]->mesh.indices,  listeObjets[i]->mesh.indexCount* sizeof(GLushort));
-    }
-
 //! [1]
 }
 
@@ -260,7 +241,7 @@ void GeometryEngine::draw(QOpenGLShaderProgram *program)
 
     int texcoordLocation = program->attributeLocation("a_texcoord");
 
-    drawGameObject(program, offset, mat, vertexLocation, texcoordLocation, monde); //objectList[0]
+    drawGameObject(program, offset, mat, vertexLocation, texcoordLocation, monde);
 }
 
 
@@ -292,8 +273,7 @@ void GeometryEngine::drawGameObject(QOpenGLShaderProgram *program, quintptr offs
     if(!obj->child->isEmpty()){
         for(int i = 0; i < obj->child->size(); i++){
 
-            program->setUniformValue("TextN",obj->child->value(i)->mesh.TextN  );
-
+            program->setUniformValue("TextN", obj->child->value(i)->mesh.TextN);
 
             drawGameObject(program, offset, mat, vertexLocation, texcoordLocation, obj->child->value(i));
         }

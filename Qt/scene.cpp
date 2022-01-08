@@ -13,13 +13,16 @@ Scene::Scene(QVector3D v1, Scene * s1, int type_scene, QVector3D translation, fl
     passage1 = v1;
 
     previous = s1;
-    QMatrix4x4 mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
 
+    QMatrix4x4 mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
     GeometryEngine::monde->transform.transform(&mat);
     translation = translation * mat;
+
     this->angle =angle;
     this->translation = translation;
     this->type_scene = type_scene;
+
+    objectList = new QList<GameObject*>();
 
     std::string str = "../Something_Return/Qt/back.off";
     char back[str.length() + 1];
@@ -47,10 +50,10 @@ Scene::Scene(QVector3D v1, Scene * s1, int type_scene, QVector3D translation, fl
 
     case 1:
         addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(back), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(0.0f,0.0f,-20.0f) + translation), 1.0f), true));
-        addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(wall1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(0.0f,0.0f,0.0f) + translation), 10.0f), true));
-        addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(wall1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(8.0f,0.0f,0.0f) + translation), 10.0f), true));
-        addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(floor1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(0.0f,0.0f,0.0f) + translation), 10.0f), true));
-        addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(floor1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(0.0f,6.0f,0.0f) + translation), 10.0f), true));
+        addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(wall1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(0.0f,0.0f,0.0f) + translation), 1.0f), true));
+        addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(wall1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 /*+ angle*/), (QVector3D(8.0f,0.0f,0.0f) /*+ translation*/), 1.0f), true));
+        addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(floor1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(0.0f,0.0f,0.0f) + translation), 1.0f), true));
+        addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(floor1), Transform(QQuaternion::fromAxisAndAngle(QVector3D(0.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(0.0f,6.0f,0.0f) + translation), 1.0f), true));
         addGameObject(new GameObject(GeometryEngine::monde, GeometryEngine::loadOffSimple(back), Transform(QQuaternion::fromAxisAndAngle(QVector3D(8.0f, 1.0f, 0.0f), 00 + angle), (QVector3D(0.0f,0.0f,0.0f) + translation), 1.0f), true));
         next = NULL;
         passage2 = QVector3D(0.0,0.0,-19.0)*mat+translation;
@@ -94,17 +97,17 @@ Scene::Scene(QVector3D v1, Scene * s1, int type_scene, QVector3D translation, fl
 
 void Scene::addGameObject(GameObject* object) {
 
-    if(qFind(objectList.begin(), objectList.end(), object) != objectList.end()) {
+    /*if(qFind(objectList->begin(), objectList->end(), object) != objectList->end()) {
 
-    objectList.append(object);
+    objectList->append(object);
     return;
-    }
+    }*/
 
-    objectList.push_back(object);
+    objectList->push_back(object);
 }
 
 void Scene::deleteGameObject(GameObject* object) {
-    objectList.removeOne(object);
+    objectList->removeOne(object);
 }
 
 /*QList<GameObject*> Scene::findChildren(const GameObject* object) {
@@ -187,23 +190,28 @@ void Scene::updateScene() {
 
 void Scene::loadScene() {
 
-    for(int i = 0; i < objectList.size(); i++) {
+    for(int i = 0; i < objectList->size(); i++) {
 
-        GeometryEngine::monde->addEnfant(objectList[i]);
+        GeometryEngine::monde->addEnfant(objectList->value(i));
+
+        objectList->value(i)->arrayBuf.create();
+        objectList->value(i)->indexBuf.create();
+
+        objectList->value(i)->arrayBuf.bind();
+        objectList->value(i)->arrayBuf.allocate(objectList->value(i)->mesh.vertices, objectList->value(i)->mesh.vertexNumber * sizeof(VertexData));
+
+        objectList->value(i)->indexBuf.bind();
+        objectList->value(i)->indexBuf.allocate(objectList->value(i)->mesh.indices,  objectList->value(i)->mesh.indexCount* sizeof(GLushort));
     }
-
-    QMatrix4x4 mat = QMatrix4x4(1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0);
-
-    GeometryEngine::monde->transform.transform(&mat);
 
     MainWidget::scenes_en_cours->push_back(this);
 }
 
 void Scene::unloadScene() {
 
-    for(int i = 0; i < objectList.size(); i++) {
+    for(int i = 0; i < objectList->size(); i++) {
 
-        GeometryEngine::monde->child->removeOne(objectList[i]);
+        GeometryEngine::monde->child->removeOne(objectList->value(i));
     }
 
     MainWidget::scenes_en_cours->push_back(this);
