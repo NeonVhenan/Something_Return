@@ -97,7 +97,7 @@ template< class point_t , class type_t > bool open( const std::string & filename
     qDebug("The current working directory is %s", cCurrentPath);
     std::ifstream myfile;
     std::string path =(cCurrentPath);
-    path = path +"\\debug\\"+filename;
+    path = path +"\\debug\\"+"sphere.off";
   //  std::cout << path <<" testtttt" << std::endl;
     myfile.open(/*path.c_str());//*/filename.c_str());
   /*  if (!myfile.is_open())

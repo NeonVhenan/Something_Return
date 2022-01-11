@@ -18,13 +18,12 @@ void main()
  else{
      if(TextN == 2)
          gl_FragColor = texture2D(porte, v_texcoord);
-     else
-         gl_FragColor = texture2D(sol, v_texcoord);
+     else{
+         if(TextN == 4)
+            gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+         else
+            gl_FragColor = texture2D(sol, v_texcoord);
+     }
  }
-
- //float originalZ = gl_FragCoord.z / gl_FragCoord.w;
- //originalZ=originalZ - floor(originalZ);
-// gl_FragColor = vec4(originalZ, originalZ, originalZ,1.);
 }
-//! [0]
 

@@ -352,6 +352,8 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
                 }
                 else{
                     if(mouvement){
+
+
                         GeometryEngine::monde->transform.addTranslation(QVector3D(0.0f, 0.01f, 0.0f));
                         mouvement = false;
                     }
@@ -464,6 +466,9 @@ void MainWidget::keyPressEvent(QKeyEvent *e){
     }
 
     update();
+    for(int i = 0; i < scenes_en_cours->size(); i++){
+        scenes_en_cours->value(i)->updateScene();
+    }
 }
 
 void MainWidget::initializeGL()
